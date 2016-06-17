@@ -56,7 +56,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <!--自动扫描mapper-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <property name="basePackage" value="com.zhuhai.mapper"/>
     </bean>
 

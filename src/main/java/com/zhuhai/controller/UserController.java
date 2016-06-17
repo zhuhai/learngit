@@ -21,10 +21,10 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/add",method = RequestMethod.GET)
     public String createUser() {
         User user = new User();
-        user.setUserName("张三");
+        user.setUserName("李四");
         user.setPassword("1234");
         userService.saveUser(user);
         return "userList";
