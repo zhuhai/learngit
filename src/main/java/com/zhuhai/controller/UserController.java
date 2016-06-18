@@ -21,12 +21,9 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value = "/add",method = RequestMethod.GET)
-    public String createUser() {
-        User user = new User();
-        user.setUserName("李四");
-        user.setPassword("1234");
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public String createUser(User user) {
         userService.saveUser(user);
-        return "userList";
+        return "user/userList";
     }
 }
