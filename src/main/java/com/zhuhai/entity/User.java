@@ -1,9 +1,14 @@
 package com.zhuhai.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by hai on 2016/6/16.
  */
-public class User {
+public class User implements Serializable{
+
+    private static final long serialVersionUID = 7337481140404161122L;
+
     private Long id;
     private String userName;
     private String password;

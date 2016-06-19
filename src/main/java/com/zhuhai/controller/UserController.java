@@ -30,7 +30,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public String getUserList(Model model) {
         model.addAttribute("userList",userService.findAll());
-        return "/user/userList";
+        return "user/userList";
     }
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
