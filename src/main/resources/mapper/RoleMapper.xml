@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.zhuhai.mapper.RoleMapper">
+    <insert id="createRole" parameterType="Role" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sys_role(role,description,resource_ids,avaliable) VALUES (#{role},#{description},#{resourceIds},#{avaliable})
+    </insert>
+    <update id="updateRole" parameterType="Role">
+        UPDATE sys_role SET role=#{role},description=#{description},resource_ids=#{resourceIds},avaliable=#{avaliable} WHERE id = #{id}
+    </update>
+    <delete id="deleteRole" parameterType="long">
+        DELETE FROM sys_role WHERE id = #{id}
+    </delete>
+    <select id="findById" parameterType="long" resultType="Role">
+        SELECT id,role,description,resource_ids,avaliable FROM sys_role WHERE id = #{id}
+    </select>
+    <select id="findAll" parameterType="long" resultType="Role">
+        SELECT id,role,description,resource_ids,avaliable FROM sys_role WHERE avaliable = TRUE
+    </select>
+
+</mapper>

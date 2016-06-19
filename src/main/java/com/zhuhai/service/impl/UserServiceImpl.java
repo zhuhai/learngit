@@ -1,11 +1,12 @@
 package com.zhuhai.service.impl;
 
 import com.zhuhai.mapper.UserMapper;
-import com.zhuhai.pojo.User;
+import com.zhuhai.entity.User;
 import com.zhuhai.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,4 +24,25 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         userMapper.createUser(user);
     }
+
+    @Override
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
+    }
+
+    @Override
+    public void deleteUser(Long userId) {
+        userMapper.deleteUser(userId);
+    }
+
+    @Override
+    public User findUserById(Long userId) {
+        return userMapper.findById(userId);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userMapper.findAll();
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.zhuhai.controller;
 
-import com.zhuhai.pojo.User;
+import com.zhuhai.entity.User;
 import com.zhuhai.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

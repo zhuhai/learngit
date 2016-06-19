@@ -1,6 +1,8 @@
 package com.zhuhai.mapper;
 
-import com.zhuhai.pojo.User;
+import com.zhuhai.entity.User;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,4 +13,14 @@ import com.zhuhai.pojo.User;
 public interface UserMapper {
 
     public void createUser(User user);
+
+    public void updateUser(User user);
+
+    public void deleteUser(Long userId);
+
+    public User findById(Long userId);
+
+    public List<User> findAll();
+
+    public User findByUserName(String userName);
 }
