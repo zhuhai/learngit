@@ -16,9 +16,9 @@ public interface OrganizationMapper {
 
     public void updateOrganization(Organization organization);
 
-    public void deleteOrganization(Long id);
+    public void deleteOrganization(long id);
 
-    public Organization findById(Long id);
+    public Organization findById(long id);
 
     public List<Organization> findAll();
 }

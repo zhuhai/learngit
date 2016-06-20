@@ -3,6 +3,7 @@ package com.zhuhai.service;
 import com.zhuhai.entity.User;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,4 +19,6 @@ public interface UserService {
     public User findUserById(Long userId);
     public List<User> findAll();
     public User findUserByUserName(String userName);
+    public Set<String> findRolesByUserName(String userName);
+    public Set<String> findPermissionsByUserName(String userName);
 }

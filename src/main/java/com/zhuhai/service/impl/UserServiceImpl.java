@@ -1,12 +1,19 @@
 package com.zhuhai.service.impl;
 
+import com.zhuhai.mapper.ResourceMapper;
+import com.zhuhai.mapper.RoleMapper;
 import com.zhuhai.mapper.UserMapper;
 import com.zhuhai.entity.User;
 import com.zhuhai.service.UserService;
+import com.zhuhai.utils.CommonUtil;
+import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +26,10 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private RoleMapper roleMapper;
+    @Resource
+    private ResourceMapper resourceMapper;
 
     @Override
     public void saveUser(User user) {
@@ -48,6 +59,44 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByUserName(String userName) {
         return userMapper.findByUserName(userName);
+    }
+
+    /**
+     * 根据用户名获取角色id
+     * @param userName
+     * @return
+     */
+    @Override
+    public Set<String> findRolesByUserName(String userName) {
+        User user = userMapper.findByUserName(userName);
+        if (user == null) {
+            return Collections.EMPTY_SET;
+        }
+        String[] roleIds = user.getRoleIds().split(",");
+        return roleMapper.findRolesByIds(CommonUtil.stringArray2LongArray(roleIds));
+    }
+
+    /**
+     * 根据用户获取权限名称列表
+     * @param userName
+     * @return
+     */
+    @Override
+    public Set<String> findPermissionsByUserName(String userName) {
+        User user = userMapper.findByUserName(userName);
+        if (user == null) {
+            return Collections.EMPTY_SET;
+        }
+        String[] roleIds = user.getRoleIds().split(",");
+        Set<String> resources = roleMapper.findResourceIdsByIds(CommonUtil.stringArray2LongArray(roleIds));
+        Set<Long> resourceIdSet = new HashSet<Long>();
+        for (String resource : resources) {
+            String[] resourceIds = resource.split(",");
+            for (String resourceId : resourceIds) {
+                resourceIdSet.add(Long.valueOf(resourceId));
+            }
+        }
+        return resourceMapper.findPermissionsByIds(resourceIdSet.toArray(new Long[resourceIdSet.size()]));
     }
 
 }

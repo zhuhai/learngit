@@ -1,5 +1,8 @@
 package com.zhuhai.entity;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA
  * User: hai
@@ -7,7 +10,10 @@ package com.zhuhai.entity;
  * Time: 23:43
  */
 
-public class Resource {
+public class Resource implements Serializable{
+
+    private static final long serialVersionUID = -8451827913855903760L;
+
     private Long id;
     private String name;
     private ResourceType type;
@@ -16,6 +22,8 @@ public class Resource {
     private String parentIds;
     private String permission;
     private Boolean avaliable;
+    private Date updateTime;
+    private Date createTime = new Date();
 
     public static enum ResourceType{
         menu("菜单"),
@@ -103,4 +111,19 @@ public class Resource {
         return getParentIds() + getParentId() +"/";
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

@@ -16,9 +16,9 @@ public interface UserMapper {
 
     public void updateUser(User user);
 
-    public void deleteUser(Long userId);
+    public void deleteUser(long userId);
 
-    public User findById(Long userId);
+    public User findById(long userId);
 
     public List<User> findAll();
 

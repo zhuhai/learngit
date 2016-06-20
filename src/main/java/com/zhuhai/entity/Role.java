@@ -1,5 +1,8 @@
 package com.zhuhai.entity;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA
  * User: hai
@@ -7,13 +10,17 @@ package com.zhuhai.entity;
  * Time: 23:55
  */
 
-public class Role {
+public class Role implements Serializable{
+
+    private static final long serialVersionUID = 6103625113611842274L;
 
     private Long id;
     private String role;
     private String description;
     private String resourceIds;
     private Boolean avaliable;
+    private Date updateTime;
+    private Date createTime = new Date();
 
     public Long getId() {
         return id;
@@ -55,5 +62,19 @@ public class Role {
         this.avaliable = avaliable;
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

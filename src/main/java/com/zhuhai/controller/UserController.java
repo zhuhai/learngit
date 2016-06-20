@@ -2,6 +2,7 @@ package com.zhuhai.controller;
 
 import com.zhuhai.entity.User;
 import com.zhuhai.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @RequiresRoles("admin")
     @RequestMapping(method = RequestMethod.GET)
     public String getUserList(Model model) {
         model.addAttribute("userList",userService.findAll());

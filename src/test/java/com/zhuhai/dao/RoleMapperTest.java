@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA
@@ -22,11 +23,13 @@ public class RoleMapperTest {
     @Resource
     private RoleMapper roleMapper;
     @Test
-    public void findById(){
+    public void testFindById(){
         long roleId = 1;
         Role role = roleMapper.findById(roleId);
         System.out.println(role.getRole());
         Assert.assertNotNull(role);
     }
+
+
 
 }

@@ -3,6 +3,7 @@ package com.zhuhai.mapper;
 import com.zhuhai.entity.Role;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA
@@ -16,9 +17,13 @@ public interface RoleMapper {
 
     public void updateRole(Role role);
 
-    public void deleteRole(Long id);
+    public void deleteRole(long id);
 
-    public Role findById(Long id);
+    public Role findById(long id);
 
     public List<Role> findAll();
+
+    public Set<String> findResourceIdsByIds(Long[] ids);
+
+    public Set<String> findRolesByIds(Long[] ids);
 }

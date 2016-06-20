@@ -4,20 +4,46 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
 <mapper namespace="com.zhuhai.mapper.RoleMapper">
+
+    <cache/>
+
+    <sql id="roleColumns">role,description,resource_ids,avaliable,update_time,create_time</sql>
+
     <insert id="createRole" parameterType="Role" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sys_role(role,description,resource_ids,avaliable) VALUES (#{role},#{description},#{resourceIds},#{avaliable})
+        INSERT INTO sys_role(<include refid="roleColumns"/>) VALUES (#{role},#{description},#{resourceIds},#{avaliable},#{updateTime},#{createTime})
     </insert>
+
     <update id="updateRole" parameterType="Role">
         UPDATE sys_role SET role=#{role},description=#{description},resource_ids=#{resourceIds},avaliable=#{avaliable} WHERE id = #{id}
     </update>
+
     <delete id="deleteRole" parameterType="long">
         DELETE FROM sys_role WHERE id = #{id}
     </delete>
+
     <select id="findById" parameterType="long" resultType="Role">
-        SELECT id,role,description,resource_ids,avaliable FROM sys_role WHERE id = #{id}
+        SELECT id,<include refid="roleColumns"/> FROM sys_role WHERE id = #{id}
     </select>
+
     <select id="findAll" parameterType="long" resultType="Role">
-        SELECT id,role,description,resource_ids,avaliable FROM sys_role WHERE avaliable = TRUE
+        SELECT id,<include refid="roleColumns"/> FROM sys_role WHERE avaliable = TRUE
     </select>
+
+    <select id="findResourceIdsByIds" resultType="string">
+        SELECT resource_ids FROM sys_role WHERE avaliable = TRUE AND id IN
+          <foreach collection="array" item="ids" index="index" open="(" separator="," close=")">
+              #{ids}
+          </foreach>
+
+    </select>
+
+    <select id="findRolesByIds" resultType="string">
+        SELECT role FROM sys_role WHERE avaliable = TRUE AND id IN
+        <foreach collection="array" item="ids" index="index" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+
+    </select>
+
 
 </mapper>
