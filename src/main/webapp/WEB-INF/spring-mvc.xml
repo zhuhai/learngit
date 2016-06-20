@@ -38,5 +38,14 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
+    <!--<bean id="handlerExceptionResover" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">redirect:/home</prop>
+                <prop key="com.zhuhai.exception.AuthorizationException">redirect:/login</prop>
+            </props>
+        </property>
+
+    </bean>-->
 
 </beans>

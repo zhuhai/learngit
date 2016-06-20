@@ -1,6 +1,7 @@
 package com.zhuhai.controller;
 
 import com.zhuhai.entity.User;
+import com.zhuhai.exception.AuthorizationException;
 import com.zhuhai.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.Logger;
@@ -31,7 +32,11 @@ public class UserController {
     @RequiresRoles("admin")
     @RequestMapping(method = RequestMethod.GET)
     public String getUserList(Model model) {
-        model.addAttribute("userList",userService.findAll());
+        try {
+            model.addAttribute("userList",userService.findAll());
+        } catch (AuthorizationException e) {
+            e.printStackTrace();
+        }
         return "user/userList";
     }
 
