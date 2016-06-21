@@ -8,10 +8,26 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <description>shiro权限配置</description>
+
+    <!--安全管理器-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="myRealm"/>
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
+
+    <!--凭证匹配器-->
+    <!--<bean id="credentialsMatcher" class="com.zhuhai.shiro.credentials.RetryLimitHashedCredentialsMatcher">
+        <constructor-arg ref="cacheManager"/>
+        &lt;!&ndash;指定hash算法为md5&ndash;&gt;
+        <property name="hashAlgorithmName" value="md5"/>
+        &lt;!&ndash;指定散列次数为2次&ndash;&gt;
+        <property name="hashIterations" value="2"/>
+        &lt;!&ndash;ture表示Hash散列值用Hex加密库，false表示Hash散列值用Base64-encode存储&ndash;&gt;
+        <property name="storedCredentialsHexEncoded" value="true"/>
+    </bean>-->
+
+    <!--shiro过滤器-->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
@@ -26,7 +42,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
             </value>
         </property>
     </bean>
+    <!--缓存管理器-->
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <!--shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
 

@@ -1,4 +1,4 @@
-package com.zhuhai.realm;
+package com.zhuhai.shiro.realm;
 
 import com.zhuhai.entity.User;
 import com.zhuhai.service.UserService;
@@ -26,11 +26,12 @@ import javax.annotation.Resource;
  */
 @Component
 public class MyRealm extends AuthorizingRealm {
+
     @Resource
     private UserService userService;
 
     /**
-     * 权限认证
+     * 授权
      * @param principalCollection
      * @return
      */
@@ -48,7 +49,7 @@ public class MyRealm extends AuthorizingRealm {
     }
 
     /**
-     * 登录认证
+     * 认证
      * @param authenticationToken
      * @return
      * @throws AuthenticationException

@@ -3,7 +3,7 @@ package com.zhuhai.controller;
 import com.zhuhai.entity.User;
 import com.zhuhai.exception.AuthorizationException;
 import com.zhuhai.service.UserService;
-import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -29,10 +29,12 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @RequiresRoles("admin")
+    @RequiresPermissions("user:view")
     @RequestMapping(method = RequestMethod.GET)
     public String getUserList(Model model) {
         try {
+
+            System.out.println(1/0);
             model.addAttribute("userList",userService.findAll());
         } catch (AuthorizationException e) {
             e.printStackTrace();

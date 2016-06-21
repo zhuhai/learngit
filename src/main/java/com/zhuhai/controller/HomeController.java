@@ -48,11 +48,11 @@ public class HomeController {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(user.getUserName(),user.getPassword()));
             return "redirect:home";
         } catch (UnknownAccountException e) {
-            redirectAttributes.addFlashAttribute("message","用户不存在");
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
         } catch (LockedAccountException e) {
-            redirectAttributes.addFlashAttribute("message","用户已被锁定");
+            redirectAttributes.addFlashAttribute("message",e.getMessage());
         } catch (AccountException e) {
-            redirectAttributes.addFlashAttribute("message", "用户名或密码错误");
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
         } catch (AuthenticationException e) {
             redirectAttributes.addFlashAttribute("message","系统异常");
 
