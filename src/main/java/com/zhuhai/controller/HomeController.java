@@ -45,7 +45,8 @@ public class HomeController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User user, RedirectAttributes redirectAttributes) {
         try {
-            SecurityUtils.getSubject().login(new UsernamePasswordToken(user.getUserName(),user.getPassword()));
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPassword());
+            SecurityUtils.getSubject().login(token);
             return "redirect:home";
         } catch (UnknownAccountException e) {
             redirectAttributes.addFlashAttribute("message",e.getMessage());
