@@ -6,7 +6,7 @@
     <!--timeToLiveSeconds表示缓存自创建日期起至失效时的间隔时间，当eternal为false时有效，默认值为0，表示存活时间无限大-->
     <!--timeToIdleSeconds表示缓存创建以后，最后一次访问缓存的日期至失效之时的时间间隔，当eternal为false时有效，默认值为0，表示闲置时间无限大-->
     <defaultCache
-            maxElementsInMemory="10000"
+            maxEntriesLocalHeap="1000"
             eternal="false"
             timeToIdleSeconds="120"
             timeToLiveSeconds="120"
@@ -16,12 +16,16 @@
             />
 
     <!-- 登录记录缓存 锁定10分钟 -->
-    <cache name="passwordRetryCache" eternal="false"
-           timeToIdleSeconds="600" timeToLiveSeconds="0" overflowToDisk="false"
+    <cache name="passwordRetryCache"
+           maxEntriesLocalHeap="1000"
+           eternal="false"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
            statistics="true">
     </cache>
 
-    <cache name="authorizationCache" eternal="false"
+    <!--<cache name="authorizationCache" eternal="false"
            timeToIdleSeconds="3600" timeToLiveSeconds="0" overflowToDisk="false"
            statistics="true">
     </cache>
@@ -34,6 +38,6 @@
     <cache name="shiro-activeSessionCache" eternal="false"
            timeToIdleSeconds="3600" timeToLiveSeconds="0" overflowToDisk="false"
            statistics="true">
-    </cache>
+    </cache>-->
 
 </ehcache>

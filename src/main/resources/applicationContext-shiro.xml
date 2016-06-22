@@ -49,7 +49,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     </bean>
     <!--缓存管理器-->
     <!--<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>-->
-    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager"/>
+    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>
+    </bean>
     <!--shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 

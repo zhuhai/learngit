@@ -13,6 +13,6 @@ public class Constant {
     public static final String SALT = "xajf@#afs$@2wefsjf#@ljs2#$@34jf**&8$%#2jisjfe";
 
     public static void main(String[] args) {
-        System.out.println(DigestUtils.sha1Hex(SALT + "12345"));
+        System.out.println(DigestUtils.sha1Hex(SALT + "8cb2237d0679ca88db6464eac60da96345513964"));
     }
 }
