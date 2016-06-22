@@ -5,6 +5,8 @@ import com.zhuhai.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -48,11 +50,15 @@ public class HomeController {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(user.getUserName(),user.getPassword()));
             return "redirect:home";
         } catch (UnknownAccountException e) {
-            redirectAttributes.addFlashAttribute("message",e.getMessage());
+            redirectAttributes.addFlashAttribute("message","用户名或密码错误");
         } catch (LockedAccountException e) {
-            redirectAttributes.addFlashAttribute("message",e.getMessage());
+            redirectAttributes.addFlashAttribute("message","用户被锁定");
+        } catch (ExcessiveAttemptsException e) {
+            redirectAttributes.addFlashAttribute("message","输入密码次数过多，账户已被锁定");
+        } catch (IncorrectCredentialsException e){
+            redirectAttributes.addFlashAttribute("message","用户名或密码错误");
         } catch (AccountException e) {
-            redirectAttributes.addFlashAttribute("message", e.getMessage());
+            redirectAttributes.addFlashAttribute("message", "用户名或密码错误");
         } catch (AuthenticationException e) {
             redirectAttributes.addFlashAttribute("message","系统异常");
 

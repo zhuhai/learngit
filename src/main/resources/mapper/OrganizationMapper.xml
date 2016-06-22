@@ -26,7 +26,7 @@
     </select>
 
     <select id="findAll" resultType="Organization">
-        SELECT <include refid="organizationColumns"/> FROM sys_organization WHERE avaliable = true
+        SELECT id,<include refid="organizationColumns"/> FROM sys_organization WHERE avaliable = true
     </select>
 
 </mapper>

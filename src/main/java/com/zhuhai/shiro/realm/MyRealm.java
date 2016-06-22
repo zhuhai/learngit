@@ -2,7 +2,7 @@ package com.zhuhai.shiro.realm;
 
 import com.zhuhai.entity.User;
 import com.zhuhai.service.UserService;
-import org.apache.shiro.authc.AccountException;
+import com.zhuhai.utils.Constant;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,7 +14,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.stereotype.Component;
+import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
 
@@ -24,7 +24,7 @@ import javax.annotation.Resource;
  * Date: 2016/6/20
  * Time: 15:56
  */
-@Component
+
 public class MyRealm extends AuthorizingRealm {
 
     @Resource
@@ -59,15 +59,17 @@ public class MyRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         User user = userService.findUserByUserName(token.getUsername());
         if (user == null) {
-            throw new UnknownAccountException("用户不存在");
-        } else {
-            if (user.getLocked()) {
-                throw new LockedAccountException("用户已被锁定");
-            }else if (!String.valueOf(token.getPassword()).equals(user.getPassword())) {
-                throw new AccountException("用户名或密码不正确");
-            }
-            return new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(),getName());
+            throw new UnknownAccountException();
         }
+        if (user.getLocked()) {
+            throw new LockedAccountException();
+        }
+        /*if (!String.valueOf(token.getPassword()).equals(user.getPassword())) {
+            throw new AccountException();
+        }*/
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(),ByteSource.Util.bytes(Constant.SALT),getName());
+        return authenticationInfo;
+
 
     }
 }
