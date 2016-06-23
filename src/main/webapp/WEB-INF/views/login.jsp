@@ -12,14 +12,22 @@
         密码：<input id="pwd" type="password" name="password"/><br>
         <button type="button" id="btn">登录</button>
     </form>
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/sha1.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/sha1.js"></script>
     <script type="text/javascript">
         $(function(){
-            $("#btn").click(function(){
-                console.log("hehheheh");
+            function login(){
                 $("#pwd").val(CryptoJS.SHA1($("#pwd").val()));
                 $("#fm").submit();
+            }
+            $("#btn").click(function(){
+                login();
+            });
+
+            $(document).keyup(function(event){
+                if(event.keyCode == 13){
+                    login();
+                }
             });
 
 

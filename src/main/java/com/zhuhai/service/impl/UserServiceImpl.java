@@ -1,12 +1,11 @@
 package com.zhuhai.service.impl;
 
-import com.zhuhai.mapper.ResourceMapper;
+import com.zhuhai.mapper.ResourcesMapper;
 import com.zhuhai.mapper.RoleMapper;
 import com.zhuhai.mapper.UserMapper;
 import com.zhuhai.entity.User;
 import com.zhuhai.service.UserService;
 import com.zhuhai.utils.CommonUtil;
-import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private RoleMapper roleMapper;
     @Resource
-    private ResourceMapper resourceMapper;
+    private ResourcesMapper resourcesMapper;
 
     @Override
     public void saveUser(User user) {
@@ -96,7 +95,7 @@ public class UserServiceImpl implements UserService {
                 resourceIdSet.add(Long.valueOf(resourceId));
             }
         }
-        return resourceMapper.findPermissionsByIds(resourceIdSet.toArray(new Long[resourceIdSet.size()]));
+        return resourcesMapper.findPermissionsByIds(resourceIdSet.toArray(new Long[resourceIdSet.size()]));
     }
 
 }

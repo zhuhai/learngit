@@ -19,7 +19,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <!--凭证匹配器-->
     <bean id="credentialsMatcher" class="com.zhuhai.shiro.credentials.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="cacheManager"/>
-        <!--指定hash算法为md5-->
+        <!--指定hash算法为sha1-->
         <property name="hashAlgorithmName" value="SHA-1"/>
         <!--指定散列次数为2次-->
         <!--<property name="hashIterations" value="2"/>-->

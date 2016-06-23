@@ -22,7 +22,7 @@
     </delete>
 
     <select id="findById" parameterType="long" resultType="Organization">
-        SELECT <include refid="organizationColumns"/> FROM sys_organization WHERE id = #{id}
+        SELECT id,<include refid="organizationColumns"/> FROM sys_organization WHERE id = #{id}
     </select>
 
     <select id="findAll" resultType="Organization">

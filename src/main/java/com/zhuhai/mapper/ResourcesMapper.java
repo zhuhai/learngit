@@ -1,6 +1,6 @@
 package com.zhuhai.mapper;
 
-import com.zhuhai.entity.Resource;
+import com.zhuhai.entity.Resources;
 
 import java.util.List;
 import java.util.Set;
@@ -11,17 +11,17 @@ import java.util.Set;
  * Date: 2016/6/20
  * Time: 11:19
  */
-public interface ResourceMapper {
+public interface ResourcesMapper {
 
-    public void createResource(Resource resource);
+    public void createResource(Resources resources);
 
-    public void updateResource(Resource resource);
+    public void updateResource(Resources resources);
 
     public void deleteResource(long id);
 
-    public Resource findById(long id);
+    public Resources findById(long id);
 
-    public List<Resource> findAll();
+    public List<Resources> findAll();
 
     public Set<String> findPermissionsByIds(Long[] ids);
 }

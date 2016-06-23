@@ -3,17 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zhuhai.mapper.ResourceMapper">
+<mapper namespace="com.zhuhai.mapper.ResourcesMapper">
 
     <cache/>
 
     <sql id="resourceColumns">name,type,url,parent_id,parent_ids,permission,avaliable,update_time,create_time</sql>
 
-    <insert id="createResource" parameterType="Resource" useGeneratedKeys="true" keyProperty="id">
+    <insert id="createResource" parameterType="Resources" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO sys_resource(<include refid="resourceColumns"/>) VALUES (#{name},#{type},#{url},#{parentId},#{parentIds},#{permission},#{avaliable},#{updateTime},#{createTime})
     </insert>
 
-    <update id="updateResource" parameterType="Resource">
+    <update id="updateResource" parameterType="Resources">
         UPDATE sys_resource SET name = #{name},type = #{type},url = #{url},parent_id = #{parentId},parent_ids = #{parentIds},permission = #{permission},avaliable = #{avaliable} WHERE id = #{id}
     </update>
 
@@ -21,11 +21,11 @@
         DELETE FROM sys_resource WHERE id = #{id}
     </delete>
 
-    <select id="findById" parameterType="long" resultType="Resource">
+    <select id="findById" parameterType="long" resultType="Resources">
         SELECT id,<include refid="resourceColumns"/> FROM sys_resource WHERE id = #{id}
     </select>
 
-    <select id="findAll" resultType="Resource">
+    <select id="findAll" resultType="Resources">
         SELECT id,<include refid="resourceColumns"/> FROM sys_resource WHERE avaliable = TRUE
     </select>
 

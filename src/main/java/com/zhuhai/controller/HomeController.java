@@ -1,6 +1,8 @@
 package com.zhuhai.controller;
 
+import com.zhuhai.entity.Resources;
 import com.zhuhai.entity.User;
+import com.zhuhai.service.ResourcesService;
 import com.zhuhai.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AccountException;
@@ -13,11 +15,14 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA
@@ -32,10 +37,15 @@ public class HomeController {
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
     @Resource
     private UserService userService;
+    @Resource
+    private ResourcesService resourcesService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home() {
-        logger.info("首页");
+    public String home(Model model) {
+        String userName = (String) SecurityUtils.getSubject().getPrincipal();
+        Set<String> permissions = userService.findPermissionsByUserName(userName);
+        List<Resources> menus = resourcesService.findMenus(permissions);
+        model.addAttribute("menus",menus);
         return "home";
     }
 

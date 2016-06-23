@@ -12,5 +12,13 @@ import java.util.List;
  */
 public interface OrganizationService {
 
+    public void createOrganization(Organization organization);
+
+    public void updateOrganization(Organization organization);
+
+    public void deleteOrganization(long id);
+
+    public Organization findById(long id);
+
     public List<Organization> findAll();
 }

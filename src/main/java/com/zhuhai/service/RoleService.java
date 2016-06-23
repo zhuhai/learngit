@@ -1,5 +1,9 @@
 package com.zhuhai.service;
 
+import com.zhuhai.entity.Role;
+
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuhai
@@ -7,4 +11,15 @@ package com.zhuhai.service;
  * Time: 15:04
  */
 public interface RoleService {
+
+    public void createRole(Role role);
+
+    public void updateRole(Role role);
+
+    public void deleteRole(long id);
+
+    public Role findById(long id);
+
+    public List<Role> findAll();
+
 }

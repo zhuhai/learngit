@@ -20,6 +20,26 @@ public class OrganizationServiceImpl implements OrganizationService {
     private OrganizationMapper organizationMapper;
 
     @Override
+    public void createOrganization(Organization organization) {
+        organizationMapper.createOrganization(organization);
+    }
+
+    @Override
+    public void updateOrganization(Organization organization) {
+        organizationMapper.updateOrganization(organization);
+    }
+
+    @Override
+    public void deleteOrganization(long id) {
+        organizationMapper.deleteOrganization(id);
+    }
+
+    @Override
+    public Organization findById(long id) {
+        return organizationMapper.findById(id);
+    }
+
+    @Override
     public List<Organization> findAll() {
         return organizationMapper.findAll();
     }
