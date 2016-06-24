@@ -10,6 +10,7 @@
     <form id="fm" action="/login" method="post">
         用户名：<input type="text" name="userName"/><br>
         密码：<input id="pwd" type="password" name="password"/><br>
+        <input type="checkbox" name="rememberMe" value="1"/>记住我 <br/>
         <button type="button" id="btn">登录</button>
     </form>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-3.0.0.min.js"></script>

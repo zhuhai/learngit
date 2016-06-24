@@ -51,15 +51,17 @@ public class HomeController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm() {
+
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(User user, RedirectAttributes redirectAttributes) {
+    public String login(User user, boolean rememberMe,RedirectAttributes redirectAttributes) {
         try {
             logger.info("登录用户名：{}",user.getUserName());
             logger.info("登录密码：{}",user.getPassword());
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPassword());
+            logger.info("记住我：{}",rememberMe);
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPassword(),rememberMe);
             SecurityUtils.getSubject().login(token);
             return "redirect:home";
         } catch (UnknownAccountException e) {
