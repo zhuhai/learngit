@@ -37,8 +37,8 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        String loginName = (String) principalCollection.fromRealm(getName()).iterator().next();
-        User user = userService.findUserByUserName(loginName);
+        User user = (User) principalCollection.fromRealm(getName()).iterator().next();
+        //User user = userService.findUserByUserName(loginName);
         if (user != null) {
             SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
             authorizationInfo.setRoles(userService.findRolesByUserName(user.getUserName()));
@@ -67,7 +67,7 @@ public class MyRealm extends AuthorizingRealm {
         /*if (!String.valueOf(token.getPassword()).equals(user.getPassword())) {
             throw new AccountException();
         }*/
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(),ByteSource.Util.bytes(Constant.SALT),getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,user.getPassword(),ByteSource.Util.bytes(Constant.SALT),getName());
         return authenticationInfo;
 
 

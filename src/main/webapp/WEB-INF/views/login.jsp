@@ -51,7 +51,7 @@
           <div class="space-6"></div>
 
           <div class="position-relative">
-            <div id="login-box" class="login-box visible widget-box no-border">
+            <div id="login-box" class="login-box visible widget-box no-border" style="background-color: transparent">
               <div class="widget-body">
                 <div class="widget-main">
                     <div class="red text-center"><b class="message">${message}</b></div>

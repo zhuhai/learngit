@@ -7,14 +7,14 @@
 
     <cache/>
 
-    <sql id="resourceColumns">name,type,url,parent_id,parent_ids,permission,avaliable,update_time,create_time</sql>
+    <sql id="resourceColumns">name,type,url,icon,parent_id,parent_ids,permission,avaliable,update_time,create_time</sql>
 
     <insert id="createResource" parameterType="Resources" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO sys_resource(<include refid="resourceColumns"/>) VALUES (#{name},#{type},#{url},#{parentId},#{parentIds},#{permission},#{avaliable},#{updateTime},#{createTime})
     </insert>
 
     <update id="updateResource" parameterType="Resources">
-        UPDATE sys_resource SET name = #{name},type = #{type},url = #{url},parent_id = #{parentId},parent_ids = #{parentIds},permission = #{permission},avaliable = #{avaliable} WHERE id = #{id}
+        UPDATE sys_resource SET name = #{name},type = #{type},url = #{url},icon = #{icon},parent_id = #{parentId},parent_ids = #{parentIds},permission = #{permission},avaliable = #{avaliable} WHERE id = #{id}
     </update>
 
     <delete id="deleteResource" parameterType="long">

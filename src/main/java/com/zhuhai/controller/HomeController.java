@@ -42,10 +42,11 @@ public class HomeController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
-        String userName = (String) SecurityUtils.getSubject().getPrincipal();
-        Set<String> permissions = userService.findPermissionsByUserName(userName);
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        Set<String> permissions = userService.findPermissionsByUserName(user.getUserName());
         List<Resources> menus = resourcesService.findMenus(permissions);
         model.addAttribute("menus",menus);
+        model.addAttribute("user",user);
         return "home";
     }
 

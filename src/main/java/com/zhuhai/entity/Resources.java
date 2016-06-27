@@ -18,6 +18,7 @@ public class Resources implements Serializable{
     private String name;
     private ResourceType type;
     private String url;
+    private String icon;
     private Long parentId;
     private String parentIds;
     private String permission;
@@ -125,5 +126,13 @@ public class Resources implements Serializable{
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }
