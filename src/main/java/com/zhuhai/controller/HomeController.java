@@ -69,7 +69,7 @@ public class HomeController {
         } catch (LockedAccountException e) {
             redirectAttributes.addFlashAttribute("message","用户被锁定");
         } catch (ExcessiveAttemptsException e) {
-            redirectAttributes.addFlashAttribute("message","输入密码次数过多，账户已被锁定");
+            redirectAttributes.addFlashAttribute("message","失败次数过多，账号被锁定，请10分钟后再试！");
         } catch (IncorrectCredentialsException e){
             redirectAttributes.addFlashAttribute("message","用户名或密码错误");
         } catch (AccountException e) {
