@@ -41,7 +41,7 @@
         <div class="login-container">
           <div class="center">
             <h1>
-              <i class="icon-comments green"></i>
+              <i class="ace-icon fa fa-comments green"></i>
               <span class="red">微信</span>
               <span class="white">后台管理系统</span>
             </h1>
@@ -56,7 +56,7 @@
                 <div class="widget-main">
                     <div class="red text-center"><b class="message">${message}</b></div>
                   <h4 class="header blue lighter bigger" style="margin-top: 8px">
-                    <i class="icon-coffee green"></i>
+                    <i class="ace-icon fa fa-coffee green"></i>
                     请输入登录信息
                   </h4>
 
@@ -67,14 +67,14 @@
                       <label class="block clearfix">
                         <span class="block input-icon input-icon-right">
                             <input type="text" id="userName" name="userName" class="form-control" placeholder="用户名" autofocus/>
-                            <i class="icon-user"></i>
+                            <i class="ace-icon fa fa-user"></i>
                         </span>
                       </label>
 
                       <label class="block clearfix">
                         <span class="block input-icon input-icon-right">
                             <input type="password" id="pwd" name="password" class="form-control" placeholder="密码" />
-                            <i class="icon-lock"></i>
+                            <i class="ace-icon fa fa-lock"></i>
                         </span>
                       </label>
 
@@ -102,15 +102,15 @@
 
                   <div class="social-login center">
                     <a class="btn btn-primary">
-                      <i class="icon-facebook"></i>
+                      <i class="ace-icon fa fa-facebook"></i>
                     </a>
 
                     <a class="btn btn-info">
-                      <i class="icon-twitter"></i>
+                      <i class="ace-icon fa fa-twitter"></i>
                     </a>
 
                     <a class="btn btn-danger">
-                      <i class="icon-google-plus"></i>
+                      <i class="ace-icon fa fa-google-plus"></i>
                     </a>
                   </div>
                 </div><!-- /widget-main -->

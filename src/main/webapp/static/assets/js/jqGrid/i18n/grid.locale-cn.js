@@ -1,17 +1,19 @@
 ;(function($){
+/**
+ * jqGrid Chinese Translation
+ * 咖啡兔 yanhonglei@gmail.com
+ * http://www.kafeitu.me 
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+**/
 $.jgrid = $.jgrid || {};
 $.extend($.jgrid,{
     defaults : {
         recordtext: "{0} - {1}\u3000共 {2} 条", // 共字前是全角空格
         emptyrecords: "无数据显示",
-        loadtext: "正在努力为您加载数据...",
-        pgtext : " {0} 共 {1} 页",
-		pgfirst : "首页",
-		pglast : "尾页",
-		pgnext : "下一页",
-		pgprev : "上一页",
-		pgrecs : "每页最大记录数",
-		showhide: "Toggle Expand Collapse Grid"
+        loadtext: "读取中...",
+        pgtext : " {0} 共 {1} 页"
     },
     search : {
         caption: "搜索...",
@@ -25,7 +27,7 @@ $.extend($.jgrid,{
     edit : {
         addCaption: "添加记录",
         editCaption: "编辑记录",
-        bSubmit: "确定",
+        bSubmit: "提交",
         bCancel: "取消",
         bClose: "关闭",
         saveData: "数据已改变，是否保存？",
@@ -33,7 +35,7 @@ $.extend($.jgrid,{
         bNo : "否",
         bExit : "取消",
         msg: {
-            required:"该字段不能是空",
+            required:"此字段必需",
             number:"请输入有效数字",
             minValue:"输值必须大于等于 ",
             maxValue:"输值必须小于等于 ",
@@ -91,7 +93,7 @@ $.extend($.jgrid,{
         date : {
             dayNames:   [
                 "日", "一", "二", "三", "四", "五", "六",
-                "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"
+                "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六",
             ],
             monthNames: [
                 "一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二",
@@ -155,8 +157,7 @@ $.extend($.jgrid,{
                 //    F - A full textual representation of a month
                 YearMonth: "F, Y" // in jQuery UI Datepicker: "MMMM, yyyy"
             },
-            reformatAfterEdit : false,
-			userLocalTime : false
+            reformatAfterEdit : false
         },
         baseLinkUrl: '',
         showAction: '',
