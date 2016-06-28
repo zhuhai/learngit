@@ -30,31 +30,21 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="well well-sm">
-            <a id="editButton" role="button" class="btn btn-purple btn-sm" data-toggle="modal">详细信息</a>
-            <a id="tradeButton" role="button" class="btn btn-purple btn-sm" data-toggle="modal">交易记录</a>
-            <a id="authButton" role="button" class="btn btn-purple btn-sm" data-toggle="modal">实名认证</a>
+            <shiro:hasPermission name="user:create">
+                <a id="addButton" role="button" class="btn btn-primary btn-sm no-border" data-toggle="modal">添加</a>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="user:update">
+                <a id="editButton" role="button" class="btn btn-purple btn-sm no-border" data-toggle="modal">修改</a>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="user:delete">
+                <a id="delButton" role="button" class="btn btn-danger btn-sm no-border">删除</a>
+            </shiro:hasPermission>
+
         </div>
         <table id="grid-table"></table>
         <div id="grid-pager"></div>
     </div><!-- /.col -->
 </div>
-    <%--<div>
-        <table>
-            <c:forEach items="${userList}" var="user">
-                <tr>
-                    <td>${user.id}</td>
-                    <td>${user.userName}</td>
-                    <td>${user.roleIds}</td>
-                    <shiro:hasPermission name="user:update">
-                        <td><a href="/user/${user.id}/update">修改</a></td>
-                    </shiro:hasPermission>
-                </tr>
-            </c:forEach>
-        </table>
-        <shiro:hasPermission name="user:create">
-            <a href="/user/create">添加用户</a>
-        </shiro:hasPermission>
-    </div>--%>
     <script src="/static/assets/js/jquery.min.js"></script>
     <script src="/static/assets/js/bootstrap.min.js"></script>
     <script src="/static/assets/js/typeahead-bs2.min.js"></script>
@@ -65,40 +55,14 @@
     <script src="/static/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
     <script src="/static/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
     <script type="text/javascript">
-        var grid_data =
-                [
-                    {id:"1",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-                    {id:"2",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-                    {id:"3",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-                    {id:"4",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
-                    {id:"5",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
-                    {id:"6",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-                    {id:"7",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
-                    {id:"8",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-                    {id:"9",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-                    {id:"10",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-                    {id:"11",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-                    {id:"12",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-                    {id:"13",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"},
-                    {id:"14",name:"Laser Printer",note:"note2",stock:"Yes",ship:"FedEx",sdate:"2007-12-03"},
-                    {id:"15",name:"Play Station",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-                    {id:"16",name:"Mobile Telephone",note:"note",stock:"Yes",ship:"ARAMEX",sdate:"2007-12-03"},
-                    {id:"17",name:"Server",note:"note2",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-                    {id:"18",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-                    {id:"19",name:"Matrix Printer",note:"note3",stock:"No", ship:"FedEx",sdate:"2007-12-03"},
-                    {id:"20",name:"Desktop Computer",note:"note",stock:"Yes",ship:"FedEx", sdate:"2007-12-03"},
-                    {id:"21",name:"Laptop",note:"Long text ",stock:"Yes",ship:"InTime",sdate:"2007-12-03"},
-                    {id:"22",name:"LCD Monitor",note:"note3",stock:"Yes",ship:"TNT",sdate:"2007-12-03"},
-                    {id:"23",name:"Speakers",note:"note",stock:"No",ship:"ARAMEX",sdate:"2007-12-03"}
-                ];
-
         jQuery(function($) {
             var grid_selector = "#grid-table";
             var pager_selector = "#grid-pager";
 
             jQuery(grid_selector).jqGrid({
-                url:"",
+                url:"/user/list",
                 datatype: "json",
+                mtype:"POST",
                 height: 250,
                 colNames:['编号','用户名','部门','角色','创建时间'],
                 colModel:[
@@ -110,12 +74,17 @@
                         sorttype:"int"
                     },
                     {
+                        name:'userName',
+                        width:90,
+                        sortable:false
+                    },
+                    {
                         name:'organization',
                         width:90,
                         sortable:false
                     },
                     {
-                        name:'role',
+                        name:'roleName',
                         width:90,
                         sortable:false
                     },
@@ -123,8 +92,8 @@
                         name:'createTime',
                         index:'createTime',
                         width:90,
-                        sorttype:"date",
-                        unformat: pickDate
+                        sorttype:"date"
+
                     }
 
                 ],
@@ -152,19 +121,6 @@
                 autowidth: true
 
             });
-
-            //enable search/filter toolbar
-            //jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
-
-
-            //enable datepicker
-            function pickDate( cellvalue, options, cell ) {
-                setTimeout(function(){
-                    $(cell) .find('input[type=text]')
-                            .datepicker({format:'yyyy-mm-dd' , autoclose:true});
-                }, 0);
-            }
-
 
             //it causes some flicker when reloading or navigating grid
             //it may be possible to have some custom formatter to do this as the grid is being created to prevent this

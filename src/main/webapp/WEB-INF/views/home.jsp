@@ -85,7 +85,7 @@
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="/static/assets/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>Welcome,</small>
+									<small>欢迎您,</small>
 									<shiro:principal property="userName"/>
 								</span>
 
@@ -398,6 +398,8 @@
     $(function(){
         $(".menus > a").click(function(){
             var url = $(this).attr("data-url");
+            $(".nav-list li").removeClass("active");
+            $(this).parent().addClass("active");
             $("#content").attr("src",url);
 
         });
