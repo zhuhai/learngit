@@ -34,4 +34,12 @@ public class UserMapperTest {
 
     }
 
+    @Test
+    public void testCreate() {
+        User user = new User();
+        user.setUserName("test");
+        user.setPassword("123456");
+        userMapper.createUser(user);
+    }
+
 }

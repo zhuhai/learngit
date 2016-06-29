@@ -31,10 +31,13 @@
     <div class="col-xs-12">
         <div class="well well-sm">
             <shiro:hasPermission name="user:create">
-                <a id="addButton" role="button" class="btn btn-primary btn-sm no-border" data-toggle="modal">添加</a>
+                <a id="addButton" role="button" class="btn btn-primary btn-sm no-border" data-toggle="modal" data-target="#create-user-modal">添加</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="user:update">
                 <a id="editButton" role="button" class="btn btn-purple btn-sm no-border" data-toggle="modal">修改</a>
+            </shiro:hasPermission>
+            <shiro:hasPermission name="user:update">
+                <a id="delButton" role="button" class="btn btn-danger btn-sm no-border">锁定</a>
             </shiro:hasPermission>
             <shiro:hasPermission name="user:delete">
                 <a id="delButton" role="button" class="btn btn-danger btn-sm no-border">删除</a>
@@ -43,6 +46,43 @@
         </div>
         <table id="grid-table"></table>
         <div id="grid-pager"></div>
+        <!-- Modal -->
+        <div id="create-user-modal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <form id="editForm">
+                    <input type="hidden" id="edit_id" />
+                    <div class="modal-content">
+                        <div class="modal-header no-padding">
+                            <div class="table-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    <span class="white">&times;</span>
+                                </button>
+                                <p>添加用户</p>
+                            </div>
+                        </div>
+                        <div class="modal-body" style="max-height: 500px;overflow-y: scroll;">
+
+
+                        </div>
+
+                        <div class="modal-footer no-margin-top">
+                            <div class="text-center">
+
+                                <button id="submitEditButton" type="button" class="btn btn-primary no-border">
+                                    <i class="ace-icon fa fa-floppy-o bigger-125"></i>
+                                    保存
+                                </button>
+
+                            <button class="btn btn-pink no-border" data-dismiss="modal">
+                                <i class="ace-icon fa fa-times bigger-125"></i>
+                                关闭
+                            </button>
+                        </div>
+                    </div>
+            </div><!-- /.modal-content -->
+            </form>
+        </div><!-- /.modal-dialog -->
+    </div>
     </div><!-- /.col -->
 </div>
     <script src="/static/assets/js/jquery.min.js"></script>
@@ -64,7 +104,7 @@
                 datatype: "json",
                 mtype:"POST",
                 height: 250,
-                colNames:['编号','用户名','部门','角色','创建时间'],
+                colNames:['编号','用户名','部门','角色','是否锁定','创建时间'],
                 colModel:[
                     {
                         key:true,
@@ -87,6 +127,25 @@
                         name:'roleName',
                         width:90,
                         sortable:false
+                    },
+                    {
+                        name:'locked',
+                        width:90,
+                        sortable:false,
+                        formatter: function (cellvalue,options,rowObject) {
+                            var screenValue = '';
+                            switch (cellvalue) {
+                                case false:
+                                    screenValue = '未锁定';
+                                    break;
+                                case true:
+                                    screenValue = '锁定';
+                                    break;
+                                default :
+                                    screenValue = '未锁定';
+                            }
+                            return screenValue;
+                        }
                     },
                     {
                         name:'createTime',

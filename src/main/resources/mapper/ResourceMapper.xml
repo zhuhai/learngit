@@ -7,10 +7,10 @@
 
     <cache/>
 
-    <sql id="resourceColumns">name,type,url,icon,parent_id,parent_ids,permission,avaliable,update_time,create_time</sql>
+    <sql id="resourceColumns">id,name,type,url,icon,parent_id,parent_ids,permission,avaliable,update_time,create_time</sql>
 
     <insert id="createResource" parameterType="Resources" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sys_resource(<include refid="resourceColumns"/>) VALUES (#{name},#{type},#{url},#{parentId},#{parentIds},#{permission},#{avaliable},#{updateTime},#{createTime})
+        INSERT INTO sys_resource(<include refid="resourceColumns"/>) VALUES (#{id},#{name},#{type},#{url},#{parentId},#{parentIds},#{permission},#{avaliable},#{updateTime},#{createTime})
     </insert>
 
     <update id="updateResource" parameterType="Resources">
@@ -22,11 +22,11 @@
     </delete>
 
     <select id="findById" parameterType="long" resultType="Resources">
-        SELECT id,<include refid="resourceColumns"/> FROM sys_resource WHERE id = #{id}
+        SELECT <include refid="resourceColumns"/> FROM sys_resource WHERE id = #{id}
     </select>
 
     <select id="findAll" resultType="Resources">
-        SELECT id,<include refid="resourceColumns"/> FROM sys_resource WHERE avaliable = TRUE
+        SELECT <include refid="resourceColumns"/> FROM sys_resource WHERE avaliable = TRUE
     </select>
 
     <select id="findPermissionsByIds" resultType="string">

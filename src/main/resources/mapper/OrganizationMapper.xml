@@ -7,10 +7,10 @@
 
     <cache/>
 
-    <sql id="organizationColumns">name,parent_id,parent_ids,avaliable,update_time,create_time</sql>
+    <sql id="organizationColumns">id,name,parent_id,parent_ids,avaliable,update_time,create_time</sql>
 
     <insert id="createOrganization" parameterType="Organization" useGeneratedKeys="true" keyProperty="id">
-      INSERT INTO sys_organization(<include refid="organizationColumns"/>) VALUES(#{name},#{parentId},#{parentIds},#{avaliable},#{updateTime},#{createTime})
+      INSERT INTO sys_organization(<include refid="organizationColumns"/>) VALUES(#{id},#{name},#{parentId},#{parentIds},#{avaliable},#{updateTime},#{createTime})
     </insert>
 
     <update id="updateOrganization" parameterType="Organization">
@@ -22,11 +22,11 @@
     </delete>
 
     <select id="findById" parameterType="long" resultType="Organization">
-        SELECT id,<include refid="organizationColumns"/> FROM sys_organization WHERE id = #{id}
+        SELECT <include refid="organizationColumns"/> FROM sys_organization WHERE id = #{id}
     </select>
 
     <select id="findAll" resultType="Organization">
-        SELECT id,<include refid="organizationColumns"/> FROM sys_organization WHERE avaliable = true
+        SELECT <include refid="organizationColumns"/> FROM sys_organization WHERE avaliable = true
     </select>
 
 </mapper>

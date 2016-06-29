@@ -7,10 +7,10 @@
 
     <cache/>
 
-    <sql id="roleColumns">role,description,resource_ids,avaliable,update_time,create_time</sql>
+    <sql id="roleColumns">id,role,description,resource_ids,avaliable,update_time,create_time</sql>
 
     <insert id="createRole" parameterType="Role" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO sys_role(<include refid="roleColumns"/>) VALUES (#{role},#{description},#{resourceIds},#{avaliable},#{updateTime},#{createTime})
+        INSERT INTO sys_role(<include refid="roleColumns"/>) VALUES (#{id},#{role},#{description},#{resourceIds},#{avaliable},#{updateTime},#{createTime})
     </insert>
 
     <update id="updateRole" parameterType="Role">
@@ -22,11 +22,11 @@
     </delete>
 
     <select id="findById" parameterType="long" resultType="Role">
-        SELECT id,<include refid="roleColumns"/> FROM sys_role WHERE id = #{id}
+        SELECT <include refid="roleColumns"/> FROM sys_role WHERE id = #{id}
     </select>
 
     <select id="findAll" parameterType="long" resultType="Role">
-        SELECT id,<include refid="roleColumns"/> FROM sys_role WHERE avaliable = TRUE
+        SELECT <include refid="roleColumns"/> FROM sys_role WHERE avaliable = TRUE
     </select>
 
     <select id="findResourceIdsByIds" resultType="string">

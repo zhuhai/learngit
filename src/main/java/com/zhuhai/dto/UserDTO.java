@@ -12,6 +12,7 @@ public class UserDTO {
     private String userName;
     private String roleName;
     private String organization;
+    private Boolean locked;
     private String createTime;
 
     public Long getId() {
@@ -44,6 +45,14 @@ public class UserDTO {
 
     public void setOrganization(String organization) {
         this.organization = organization;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
     }
 
     public String getCreateTime() {

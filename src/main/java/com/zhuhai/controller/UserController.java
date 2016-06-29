@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @RequiresPermissions("user:view")
-    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public String userList(HttpServletResponse response) {
         String result = null;
@@ -79,11 +79,12 @@ public class UserController {
                 for (int i = 0; i < roleIds.length; i++) {
                     Role role = roleService.findById(Long.valueOf(roleIds[i]));
                     roleNames.append(role.getDescription());
-                    if (i < roleIds.length-1) {
+                    if (i < roleIds.length - 1) {
                         roleNames.append(",");
                     }
                 }
                 userDTO.setRoleName(roleNames.toString());
+                userDTO.setLocked(user.getLocked());
                 userDTO.setCreateTime(DateUtil.date2String(user.getCreateTime()));
                 userDTOList.add(userDTO);
             }
@@ -100,41 +101,41 @@ public class UserController {
 
 
     @RequiresPermissions("user:create")
-    @RequestMapping(value = "/create",method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String createUserForm(Model model) {
         List<Organization> organizationList = organizationService.findAll();
-        model.addAttribute("organizationList",organizationList);
+        model.addAttribute("organizationList", organizationList);
         return "user/userAdd";
     }
 
     @RequiresPermissions("user:create")
-    @RequestMapping(value = "/create",method = RequestMethod.POST)
-    public String createUser(User user,RedirectAttributes redirectAttributes) {
-        user.setPassword(DigestUtils.sha1Hex(Constant.SALT+user.getPassword()));
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String createUser(User user, RedirectAttributes redirectAttributes) {
+        user.setPassword(DigestUtils.sha1Hex(Constant.SALT + user.getPassword()));
         user.setLocked(false);
         user.setRoleIds("2");
         userService.saveUser(user);
-        redirectAttributes.addFlashAttribute("message","添加成功");
+        redirectAttributes.addFlashAttribute("message", "添加成功");
         return "redirect:/user";
     }
 
     @RequiresPermissions("user:update")
-    @RequestMapping(value = "/{id:\\d+}/update",method = RequestMethod.GET)
-    public String updateUserForm(@PathVariable long id,Model model) {
+    @RequestMapping(value = "/{id:\\d+}/update", method = RequestMethod.GET)
+    public String updateUserForm(@PathVariable long id, Model model) {
         User user = userService.findUserById(id);
         List<Organization> organizationList = organizationService.findAll();
-        model.addAttribute("organizationList",organizationList);
-        model.addAttribute("user",user);
+        model.addAttribute("organizationList", organizationList);
+        model.addAttribute("user", user);
         return "/user/userEdit";
     }
 
     @RequiresPermissions("user:update")
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public String updateUser(User user,RedirectAttributes redirectAttributes) {
-        user.setPassword(DigestUtils.sha1Hex(Constant.SALT+user.getPassword()));
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String updateUser(User user, RedirectAttributes redirectAttributes) {
+        user.setPassword(DigestUtils.sha1Hex(Constant.SALT + user.getPassword()));
         user.setLocked(false);
         userService.updateUser(user);
-        redirectAttributes.addFlashAttribute("message","修改成功");
+        redirectAttributes.addFlashAttribute("message", "修改成功");
         return "redirect:/user";
     }
 }
