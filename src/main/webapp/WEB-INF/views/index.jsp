@@ -12,7 +12,7 @@
         欢迎使用微信后台管理系统
     </div>
     <script type="text/javascript">
-        var scripts = [null, null]
+        var scripts = [null,null];
         ace.load_ajax_scripts(scripts, function() {
             //inline scripts related to this page
         });

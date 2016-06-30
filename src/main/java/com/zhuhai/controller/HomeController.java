@@ -40,7 +40,7 @@ public class HomeController {
     @Resource
     private ResourcesService resourcesService;
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String home(Model model) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         Set<String> permissions = userService.findPermissionsByUserName(user.getUserName());
@@ -64,7 +64,7 @@ public class HomeController {
             logger.info("记住我：{}",rememberMe);
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),user.getPassword(),rememberMe);
             SecurityUtils.getSubject().login(token);
-            return "redirect:home";
+            return "redirect:/";
         } catch (UnknownAccountException e) {
             redirectAttributes.addFlashAttribute("message","用户名或密码错误");
         } catch (LockedAccountException e) {

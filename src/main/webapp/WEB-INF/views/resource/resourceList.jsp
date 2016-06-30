@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>用户列表</title>
+  <title>资源列表</title>
   <link rel="stylesheet" href="/static/css/ui.jqgrid.css" />
 
 </head>
@@ -39,7 +39,6 @@
         <div id="create-user-modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
                 <form id="editForm">
-                    <input type="hidden" id="edit_id" />
                     <div class="modal-content">
                         <div class="modal-header no-padding">
                             <div class="table-header">
@@ -62,14 +61,16 @@
                                     保存
                                 </button>
 
-                            <button class="btn btn-pink no-border" data-dismiss="modal">
-                                <i class="ace-icon fa fa-times bigger-125"></i>
-                                关闭
-                            </button>
+                                <button class="btn btn-pink no-border" data-dismiss="modal">
+                                    <i class="ace-icon fa fa-times bigger-125"></i>
+                                    关闭
+                                </button>
+                            </div>
                         </div>
-                    </div>
-            </div><!-- /.modal-content -->
-            </form>
+                    </div><!-- /.modal-content -->
+                </form>
+            </div>
+
         </div><!-- /.modal-dialog -->
     </div>
     </div><!-- /.col -->
@@ -82,6 +83,20 @@
             $(function(){
                 var grid_selector = "#grid-table";
                 var pager_selector = "#grid-pager";
+                //resize to fit page size
+                $(window).on('resize.jqGrid', function () {
+                    $(grid_selector).jqGrid( 'setGridWidth', $(".page-content").width() );
+                })
+                //resize on sidebar collapse/expand
+                var parent_column = $(grid_selector).closest('[class*="col-"]');
+                $(document).on('settings.ace.jqGrid' , function(ev, event_name, collapsed) {
+                    if( event_name === 'sidebar_collapsed' || event_name === 'main_container_fixed' ) {
+                        //setTimeout is for webkit only to give time for DOM changes and then redraw!!!
+                        setTimeout(function() {
+                            $(grid_selector).jqGrid( 'setGridWidth', parent_column.width() );
+                        }, 0);
+                    }
+                })
 
                 jQuery(grid_selector).jqGrid({
                     url:"/user/list",
@@ -225,6 +240,7 @@
 
                 //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
             });
+            $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
 
         });
 

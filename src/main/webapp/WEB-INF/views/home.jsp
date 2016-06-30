@@ -12,32 +12,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" />
 
     <!-- text fonts -->
-    <link rel="stylesheet" href="/static/assets/css/ace-fonts.css" />
+    <link rel="stylesheet" href="/static/css/ace/ace-fonts.css" />
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="/static/assets/css/ace.min.css" id="main-ace-style" />
+    <link rel="stylesheet" href="/static/css/ace/ace.min.css" id="main-ace-style" />
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="/static/assets/css/ace-part2.min.css" />
+    <link rel="stylesheet" href="/static/css/ace/ace-part2.min.css" />
     <![endif]-->
-    <link rel="stylesheet" href="/static/assets/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="/static/css/ace/ace-skins.min.css" />
+    <link rel="stylesheet" href="/static/css/ace/ace-rtl.min.css" />
 
     <!--[if lte IE 9]>
-    <link rel="stylesheet" href="/static/assets/css/ace-ie.min.css" />
+    <link rel="stylesheet" href="/static/css/ace/ace-ie.min.css" />
     <![endif]-->
     <!-- ace settings handler -->
-    <script src="/static/assets/js/ace-extra.min.js"></script>
+    <script src="/static/js/ace/ace-extra.min.js"></script>
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
     <!--[if lte IE 8]>
-    <script src="/static/assets/js/html5shiv.min.js"></script>
-    <script src="/static/assets/js/respond.min.js"></script>
+    <script src="/static/js/html5shiv.min.js"></script>
+    <script src="/static/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
@@ -71,7 +71,7 @@
                     <!-- #section:basics/navbar.user_menu -->
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="/static/assets/avatars/user.jpg" alt="头像" />
+                            <img class="nav-user-photo" src="/static/avatars/user.jpg" alt="头像" />
                             <span class="user-info">
                                 <small>欢迎您,</small>
                                 <shiro:principal property="userName"/>
@@ -80,13 +80,13 @@
                         </a>
                         <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                             <li>
-                                <a href="/user/${user.id}/update">
+                                <a href="#/user/${user.id}/update">
                                     <i class="ace-icon fa fa-cog"></i>
                                     设置
                                 </a>
                             </li>
                             <li>
-                                <a href="profile.html">
+                                <a href="#">
                                     <i class="ace-icon fa fa-user"></i>
                                     个人资料
                                 </a>
@@ -118,13 +118,6 @@
             </script>
             <!--nav-list-->
             <ul class="nav nav-list">
-                <li class="active">
-                    <a href="/home">
-                        <i class="menu-icon fa fa-tachometer"></i>
-                        <span class="menu-text"> 控制台 </span>
-                    </a>
-                    <b class="arrow"></b>
-                </li>
                 <c:forEach items="${menus}" var="menu">
                     <li class="menus">
                         <a href="#${menu.url}" data-url="${menu.url}">
@@ -159,9 +152,8 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="#">首页</a>
+                        <a href="/">首页</a>
                     </li>
-                    <li class="active">控制台</li>
                 </ul><!-- /.breadcrumb -->
 
             </div>
@@ -256,11 +248,7 @@
 
                 <!-- /section:settings.box -->
                 <div class="page-content-area" data-ajax-content="true">
-                    <%--<div class="row">
-                        <div class="col-xs-12">
-                            &lt;%&ndash;<iframe id="content" src="/index" frameborder="0" width="100%" height="500px"></iframe>&ndash;%&gt;
-                        </div>
-                    </div> --%><!--/.row-->
+
                 </div><!-- /.page-content-area -->
             </div><!-- /.page-content -->
         </div><!-- /.main-content -->
@@ -274,20 +262,6 @@
                         Application &copy; 2016~
                     </span>
 
-                    <%--&nbsp; &nbsp;
-                            <span class="action-buttons">
-                                <a href="#">
-                                    <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                                </a>
-
-                                <a href="#">
-                                    <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
-                                </a>
-
-                                <a href="#">
-                                    <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
-                                </a>
-                            </span>--%>
                 </div>
 
                 <!-- /section:basics/footer -->
@@ -302,25 +276,25 @@
     <!-- basic scripts -->
 
     <!--[if !IE]> -->
-    <script type="text/javascript" src="/static/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <!-- <![endif]-->
 
     <!--[if IE]>
-    <script type="text/javascript" src="/static/assets/js/jquery1x.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery1x.min.js"></script>
     <![endif]-->
 
-    <script src="/static/assets/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 
     <!-- page specific plugin scripts -->
 
     <!--[if lte IE 8]>
-    <script src="/static/assets/js/excanvas.min.js"></script>
+    <script src="/static/js/excanvas.min.js"></script>
     <![endif]-->
     <!-- ace scripts -->
-    <script src="/static/assets/js/ace-elements.min.js"></script>
-    <script src="/static/assets/js/ace/ace.js"></script>
-    <script src="/static/assets/js/ace/ace.ajax-content.js"></script>
-
+    <script src="/static/js/ace/ace-elements.min.js"></script>
+    <script src="/static/js/ace/ace.min.js"></script>
+    <script src="/static/js/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="/static/js/jqGrid/grid.locale-cn.js"></script>
     <script type="text/javascript">
         //Load content via ajax
         $(function(){

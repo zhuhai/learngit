@@ -49,7 +49,7 @@ public class UserController {
 
     @RequiresPermissions("user:view")
     @RequestMapping(method = RequestMethod.GET)
-    public String getUserList(Model model) {
+    public String getUserList() {
         /*try {
             model.addAttribute("userList",userService.findAll());
         } catch (AuthorizationException e) {
