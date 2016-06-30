@@ -38,6 +38,9 @@
     <!--静态资源-->
     <mvc:resources mapping="/static/**" location="/static/"/>
     <mvc:view-controller path="/index" view-name="home-content"/>
+    <mvc:view-controller path="/404" view-name="error/404"/>
+    <mvc:view-controller path="/403" view-name="error/403"/>
+
     <!--视图解析器-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

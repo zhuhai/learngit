@@ -2,8 +2,6 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
 </head>
 <body>
     <div class="alert alert-block alert-success">
@@ -13,7 +11,11 @@
         <i class="ace-icon fa fa-check green"></i>
         欢迎使用微信后台管理系统
     </div>
-    <script src="/static/assets/js/jquery.min.js"></script>
-    <script src="/static/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var scripts = [null, null]
+        ace.load_ajax_scripts(scripts, function() {
+            //inline scripts related to this page
+        });
+    </script>
 </body>
 </html>

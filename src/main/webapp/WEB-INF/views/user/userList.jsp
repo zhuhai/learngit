@@ -1,23 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!doctype html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>用户列表</title>
-  <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
   <link rel="stylesheet" href="/static/assets/css/datepicker.css" />
   <link rel="stylesheet" href="/static/assets/css/ui.jqgrid.css" />
-  <link rel="stylesheet" href="/static/assets/css/ace.min.css" />
-  <link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
-  <link rel="stylesheet" href="/static/assets/css/ace-skins.min.css" />
-    <style>
-        html{
-            overflow-x: hidden;
-        }
-    </style>
+
 </head>
 <body style="background-color: transparent">
 <div class="search-header">
@@ -85,13 +75,9 @@
     </div>
     </div><!-- /.col -->
 </div>
-    <script src="/static/assets/js/jquery.min.js"></script>
-    <script src="/static/assets/js/bootstrap.min.js"></script>
-    <script src="/static/assets/js/typeahead-bs2.min.js"></script>
 
     <!-- page specific plugin scripts -->
 
-    <script src="/static/assets/js/date-time/bootstrap-datepicker.min.js"></script>
     <script src="/static/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
     <script src="/static/assets/js/jqGrid/i18n/grid.locale-cn.js"></script>
     <script type="text/javascript">

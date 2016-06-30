@@ -91,7 +91,6 @@ public class UserController {
 
             ObjectMapper mapper = new ObjectMapper();
             result = mapper.writeValueAsString(userDTOList);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

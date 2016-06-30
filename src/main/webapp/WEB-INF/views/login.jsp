@@ -3,27 +3,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta charset="utf-8" />
   <title>登录</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- basic styles -->
-  <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <meta name="description" content="用户登录" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+  <!-- bootstrap & fontawesome -->
+  <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
 
-  <!--[if IE 7]>
-  <link rel="stylesheet" href="/static/assets/css/font-awesome-ie7.min.css" />
-  <![endif]-->
+  <!-- text fonts -->
+  <link rel="stylesheet" href="/static/assets/css/ace-fonts.css" />
 
   <!-- ace styles -->
-
   <link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+
+  <!--[if lte IE 9]>
+  <link rel="stylesheet" href="/static/assets/css/ace-part2.min.css" />
+  <![endif]-->
   <link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
 
-  <!--[if lte IE 8]>
+  <!--[if lte IE 9]>
   <link rel="stylesheet" href="/static/assets/css/ace-ie.min.css" />
   <![endif]-->
-
-  <!-- inline styles related to this page -->
+  <link rel="stylesheet" href="/static/assets/css/ace.onpage-help.css" />
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
