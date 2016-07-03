@@ -8,5 +8,9 @@
 </head>
 <body>
     抱歉，服务器泡妞去了，请稍等。。。。
+    <script type="text/javascript">
+        var scripts = [null,null];
+        ace.load_ajax_scripts(scripts);
+    </script>
 </body>
 </html>

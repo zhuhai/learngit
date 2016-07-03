@@ -33,6 +33,10 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/spring-mvc.xml</param-value>
         </init-param>
+        <!--<init-param>
+            <param-name>throwExceptionIfNoHandlerFound</param-name>
+            <param-value>true</param-value>
+        </init-param>-->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -61,12 +65,11 @@
 
     <error-page>
         <error-code>404</error-code>
-        <!--<location>/WEB-INF/views/error/404.jsp</location>-->
         <location>/404</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/views/error/500.jsp</location>
+        <location>/500</location>
     </error-page>
 
 </web-app>

@@ -10,30 +10,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
   <!-- bootstrap & fontawesome -->
-  <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/static/assets/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/css/font-awesome.min.css" />
 
   <!-- text fonts -->
-  <link rel="stylesheet" href="/static/assets/css/ace-fonts.css" />
+  <link rel="stylesheet" href="/static/css/ace/ace-fonts.css" />
 
   <!-- ace styles -->
-  <link rel="stylesheet" href="/static/assets/css/ace.min.css" />
+  <link rel="stylesheet" href="/static/css/ace/ace.min.css" />
 
   <!--[if lte IE 9]>
-  <link rel="stylesheet" href="/static/assets/css/ace-part2.min.css" />
+  <link rel="stylesheet" href="/static/css/ace/ace-part2.min.css" />
   <![endif]-->
-  <link rel="stylesheet" href="/static/assets/css/ace-rtl.min.css" />
+  <link rel="stylesheet" href="/static/css/ace/ace-rtl.min.css" />
 
   <!--[if lte IE 9]>
-  <link rel="stylesheet" href="/static/assets/css/ace-ie.min.css" />
+  <link rel="stylesheet" href="/static/css/ace/ace-ie.min.css" />
   <![endif]-->
-  <link rel="stylesheet" href="/static/assets/css/ace.onpage-help.css" />
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
   <!--[if lt IE 9]>
-  <script src="/static/assets/js/html5shiv.js"></script>
-  <script src="/static/assets/js/respond.min.js"></script>
+  <script src="/static/js/html5shiv.min.js"></script>
+  <script src="/static/js/respond.min.js"></script>
   <![endif]-->
 </head>
 
@@ -134,7 +133,7 @@
   </div>
 </div><!-- /.main-container -->
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/sha1.js"></script>
 <script type="text/javascript">
   $(function(){

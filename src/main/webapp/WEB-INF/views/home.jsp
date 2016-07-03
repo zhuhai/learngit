@@ -275,14 +275,8 @@
 
     <!-- basic scripts -->
 
-    <!--[if !IE]> -->
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <!-- <![endif]-->
 
-    <!--[if IE]>
-    <script type="text/javascript" src="/static/js/jquery1x.min.js"></script>
-    <![endif]-->
-
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
 
     <!-- page specific plugin scripts -->
@@ -304,9 +298,10 @@
                         return url;
                     },
                     default_url: '/index'//default url
-                }
+                };
                 ace.enable_ajax_content($, options)
             }
+
         });
 
     </script>

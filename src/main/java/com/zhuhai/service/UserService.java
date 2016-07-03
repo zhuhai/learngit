@@ -1,8 +1,8 @@
 package com.zhuhai.service;
 
+import com.github.pagehelper.PageInfo;
 import com.zhuhai.entity.User;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,7 +17,7 @@ public interface UserService {
     public void updateUser(User user);
     public void deleteUser(Long userId);
     public User findUserById(Long userId);
-    public List<User> findAll();
+    public PageInfo<User> findAll(String sidx, String sord, Integer pageNo, Integer pageSize);
     public User findUserByUserName(String userName);
     public Set<String> findRolesByUserName(String userName);
     public Set<String> findPermissionsByUserName(String userName);

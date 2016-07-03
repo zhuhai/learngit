@@ -1,5 +1,7 @@
 package com.zhuhai.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.zhuhai.dto.JqGridView;
 import com.zhuhai.dto.UserDTO;
 import com.zhuhai.entity.Organization;
 import com.zhuhai.entity.Role;
@@ -19,11 +21,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,23 +52,23 @@ public class UserController {
     @RequiresPermissions("user:view")
     @RequestMapping(method = RequestMethod.GET)
     public String getUserList() {
-        /*try {
-            model.addAttribute("userList",userService.findAll());
-        } catch (AuthorizationException e) {
-            e.printStackTrace();
-        }*/
+
         return "user/userList";
     }
 
     @RequiresPermissions("user:view")
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public String userList(HttpServletResponse response) {
+    public String userList(@RequestParam(value = "sidx",required = false,defaultValue = "create_time") String sidx,
+                           @RequestParam(value = "sord",required = false,defaultValue = "asc") String sord,
+                           @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize,
+                           @RequestParam(value = "page",required = false,defaultValue = "1") Integer pageNo)  {
         String result = null;
+        JqGridView<UserDTO> jqGridView = new JqGridView<UserDTO>();
         try {
-            List<User> userList = userService.findAll();
+            PageInfo<User> pageInfo = userService.findAll(sidx,sord,pageNo,pageSize);
             List<UserDTO> userDTOList = new ArrayList<UserDTO>();
-            for (User user : userList) {
+            for (User user : pageInfo.getList()) {
                 UserDTO userDTO = new UserDTO();
                 userDTO.setId(user.getId());
                 userDTO.setUserName(user.getUserName());
@@ -87,10 +89,14 @@ public class UserController {
                 userDTO.setLocked(user.getLocked());
                 userDTO.setCreateTime(DateUtil.date2String(user.getCreateTime()));
                 userDTOList.add(userDTO);
+                jqGridView.setPage(pageInfo.getPageNum());
+                jqGridView.setTotal(pageInfo.getPages());
+                jqGridView.setRecords(pageInfo.getTotal());
+                jqGridView.setRows(userDTOList);
             }
 
             ObjectMapper mapper = new ObjectMapper();
-            result = mapper.writeValueAsString(userDTOList);
+            result = mapper.writeValueAsString(jqGridView);
         } catch (Exception e) {
             e.printStackTrace();
         }

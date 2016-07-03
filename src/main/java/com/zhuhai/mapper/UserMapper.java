@@ -1,6 +1,7 @@
 package com.zhuhai.mapper;
 
 import com.zhuhai.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface UserMapper {
 
     public User findById(long userId);
 
-    public List<User> findAll();
+    public List<User> findAll(@Param("sidx") String sidx, @Param("sord") String sord);
 
     public User findByUserName(String userName);
 }

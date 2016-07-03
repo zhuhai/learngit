@@ -9,9 +9,14 @@
 <body>
     对不起，你没有访问权限，3秒钟自动跳转到首页
     <script type="text/javascript">
-        setTimeout(function(){
-            window.location.href="/home";
-        },3000);
+        var scripts = [null,null];
+        ace.load_ajax_scripts(scripts,function(){
+            setTimeout(function(){
+                window.location.href="/";
+            },3000);
+        });
+
     </script>
+
 </body>
 </html>

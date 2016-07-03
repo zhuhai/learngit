@@ -1,10 +1,6 @@
 package com.zhuhai.exception;
 
-import org.apache.shiro.authz.UnauthorizedException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * Created with IntelliJ IDEA
@@ -20,11 +16,11 @@ public class DefaultExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(UnauthorizedException.class)
+   /* @ExceptionHandler(UnauthorizedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String processsUnAuthorizedException(UnauthorizedException e) {
-        return "error/403";
-    }
+        return "redirect:/403";
+    }*/
 
     /**
      * 全局异常处理
@@ -34,17 +30,15 @@ public class DefaultExceptionHandler {
     /*@ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String processException(Exception e) {
-        System.out.println(e.getMessage());
         if (e instanceof NullPointerException) {
-            System.out.println("空指针异常");
+            return "error/500";
         } else if (e instanceof NoHandlerFoundException) {
-            System.out.println("404 NOT Found");
+            return "error/404";
         } else if(e instanceof UnauthorizedException) {
-            System.out.println("unauthorized");
+           return "redirect:/403";
         } else {
-            System.out.println("runtime exception");
+            return "error/500";
         }
-        return "error";
     }*/
 
 }

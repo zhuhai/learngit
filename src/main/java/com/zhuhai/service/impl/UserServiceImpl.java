@@ -1,9 +1,11 @@
 package com.zhuhai.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.zhuhai.entity.User;
 import com.zhuhai.mapper.ResourcesMapper;
 import com.zhuhai.mapper.RoleMapper;
 import com.zhuhai.mapper.UserMapper;
-import com.zhuhai.entity.User;
 import com.zhuhai.service.UserService;
 import com.zhuhai.utils.CommonUtil;
 import org.springframework.stereotype.Service;
@@ -51,8 +53,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
-        return userMapper.findAll();
+    public PageInfo<User> findAll(String sidx,String sord,Integer pageNo,Integer pageSize) {
+        PageHelper.startPage(pageNo,pageSize);
+        List<User> userList = userMapper.findAll(sidx,sord);
+        return new PageInfo<User>(userList);
     }
 
     @Override

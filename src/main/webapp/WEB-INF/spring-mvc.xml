@@ -18,6 +18,7 @@
         <property name="messageConverters">
             <list>
                 <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <property name="writeAcceptCharset" value="false"/> <!--用于避免响应头过大-->
                     <property name="supportedMediaTypes">
                         <list>
                             <value>text/html;charset=UTF-8</value>
@@ -40,6 +41,7 @@
     <mvc:view-controller path="/index" view-name="index"/>
     <mvc:view-controller path="/404" view-name="error/404"/>
     <mvc:view-controller path="/403" view-name="error/403"/>
+    <mvc:view-controller path="/500" view-name="error/500"/>
 
     <!--视图解析器-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -58,14 +60,14 @@
         <property name="securityManager" ref="securityManager"/>
     </bean>
 
-    <!--<bean id="handlerExceptionResover" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <bean id="handlerExceptionResover" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="error/500"/>
         <property name="exceptionMappings">
             <props>
-                <prop key="org.apache.shiro.authz.UnauthorizedException">redirect:/home</prop>
-                <prop key="com.zhuhai.exception.AuthorizationException">redirect:/login</prop>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">error/403</prop>
             </props>
         </property>
 
-    </bean>-->
+    </bean>
 
 </beans>
