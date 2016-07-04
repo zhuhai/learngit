@@ -135,7 +135,7 @@
                                         screenValue = '未锁定';
                                         break;
                                     case true:
-                                        screenValue = '锁定';
+                                        screenValue = '<span style="color:red">锁定</span>';
                                         break;
                                     default :
                                         screenValue = '未锁定';

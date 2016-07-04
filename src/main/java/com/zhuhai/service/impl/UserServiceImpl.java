@@ -53,9 +53,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageInfo<User> findAll(String sidx,String sord,Integer pageNo,Integer pageSize) {
-        PageHelper.startPage(pageNo,pageSize);
-        List<User> userList = userMapper.findAll(sidx,sord);
+    public PageInfo<User> findAll(String sidx, String sord, Integer pageNo, Integer pageSize) {
+        PageHelper.startPage(pageNo, pageSize);
+        PageHelper.orderBy(sidx + " " + sord);
+        List<User> userList = userMapper.findAll();
         return new PageInfo<User>(userList);
     }
 
@@ -66,6 +67,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据用户名获取角色id
+     *
      * @param userName
      * @return
      */
@@ -81,6 +83,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据用户获取权限名称列表
+     *
      * @param userName
      * @return
      */

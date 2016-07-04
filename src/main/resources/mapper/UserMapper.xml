@@ -27,9 +27,6 @@
 
     <select id="findAll" resultType="User">
         SELECT <include refid="userColumns"/> FROM sys_user 
-        <if test="sidx != null">
-            ORDER BY ${sidx} ${sord}
-        </if>
     </select>
 
     <select id="findByUserName" parameterType="string" resultType="User">
