@@ -43,4 +43,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     public List<Organization> findAll() {
         return organizationMapper.findAll();
     }
+
+    @Override
+    public List<Organization> findChildOrganizations(long pid) {
+        return organizationMapper.findByParentId(pid);
+    }
 }

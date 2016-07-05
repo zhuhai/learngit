@@ -21,4 +21,6 @@ public interface OrganizationMapper {
     public Organization findById(long id);
 
     public List<Organization> findAll();
+
+    public List<Organization> findByParentId(long pid);
 }

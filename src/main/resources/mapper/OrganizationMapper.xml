@@ -29,4 +29,8 @@
         SELECT <include refid="organizationColumns"/> FROM sys_organization WHERE avaliable = true
     </select>
 
+    <select id="findByParentId" parameterType="long" resultType="Organization">
+        SELECT <include refid="organizationColumns"/> FROM sys_organization WHERE parent_id = #{parentId} AND avaliable = TRUE
+    </select>
+
 </mapper>

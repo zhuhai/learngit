@@ -17,7 +17,7 @@
 
     <!-- text fonts -->
     <link rel="stylesheet" href="/static/css/ace/ace-fonts.css" />
-
+    <link rel="stylesheet" href="/static/css/jquery.gritter.css"/>
     <!-- ace styles -->
     <link rel="stylesheet" href="/static/css/ace/ace.min.css" id="main-ace-style" />
 
@@ -284,11 +284,14 @@
     <!--[if lte IE 8]>
     <script src="/static/js/excanvas.min.js"></script>
     <![endif]-->
+
+    <script src="/static/js/jquery.gritter.min.js"></script>
     <!-- ace scripts -->
     <script src="/static/js/ace/ace-elements.min.js"></script>
     <script src="/static/js/ace/ace.min.js"></script>
     <script src="/static/js/jqGrid/jquery.jqGrid.min.js"></script>
     <script src="/static/js/jqGrid/grid.locale-cn.js"></script>
+
     <script type="text/javascript">
         //Load content via ajax
         $(function(){
