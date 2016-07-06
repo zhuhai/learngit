@@ -82,9 +82,9 @@
             $("#modify").click(function () {
                 var nodes = zTreeObj.getSelectedNodes();
                 if (nodes == null || nodes.length == 0) {
-                    alertErrorNotice("请先选择左侧需要修改的数据!")
+                    alertErrorNotice("请先选择左侧需要修改的数据!");
                 } else if ($("#name_input").val().trim() == '') {
-                    alertErrorNotice("名称不能为空!")
+                    alertErrorNotice("名称不能为空!");
                 } else {
                     var id = $("#id_input").val();
                     var name = $("#name_input").val();
@@ -95,9 +95,11 @@
                         dataType:'json',
                         success:function(result){
                             if (result && result.success) {
-                                alertSuccessNotice(result.msg)
+                                nodes[0].name = $("#name_input").val();
+                                zTreeObj.updateNode(nodes[0]);
+                                alertSuccessNotice(result.msg);
                             }else {
-                                alertErrorNotice(result.msg)
+                                alertErrorNotice(result.msg);
                             }
                         },
                         error:function(){

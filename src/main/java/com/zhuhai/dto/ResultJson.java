@@ -6,6 +6,7 @@ package com.zhuhai.dto;
  * Date: 2016/7/5
  * Time: 18:08
  */
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultJson<T> {
 
     private boolean success;

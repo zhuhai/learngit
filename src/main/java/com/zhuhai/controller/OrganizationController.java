@@ -4,8 +4,10 @@ import com.zhuhai.dto.ResultJson;
 import com.zhuhai.dto.TreeDTO;
 import com.zhuhai.entity.Organization;
 import com.zhuhai.service.OrganizationService;
+import com.zhuhai.utils.Constant;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -29,25 +31,36 @@ import java.util.List;
 @RequestMapping("/organization")
 public class OrganizationController {
 
+    private static final Logger logger = LoggerFactory.getLogger(OrganizationController.class);
     @Resource
     private OrganizationService organizationService;
 
+    /**
+     * 一次性加载树
+     * @param model
+     * @return
+     */
     @RequiresPermissions("organization:view")
     @RequestMapping(method = RequestMethod.GET)
     public String getOrganizationList(Model model) {
         List<Organization> organizationList = organizationService.findAll();
-        model.addAttribute("organizationList",organizationList);
+        model.addAttribute("organizationList", organizationList);
         return "organization/organizationList";
     }
 
+    /**
+     * 异步加载树
+     * @param id
+     * @return
+     */
     @RequiresPermissions("organization:view")
-    @RequestMapping(value = "/load/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/load/list", method = RequestMethod.GET)
     @ResponseBody
-    public String loadOrganizations(@RequestParam(value = "id",required = false,defaultValue = "0") long id) {
-        String result = null;
+    public List<TreeDTO> loadOrganizations(@RequestParam(value = "id", required = false, defaultValue = "0") long id) {
+        List<TreeDTO> treeDTOList = null;
         try {
             List<Organization> organizationList = organizationService.findChildOrganizations(id);
-            List<TreeDTO> treeDTOList = new ArrayList<TreeDTO>();
+            treeDTOList = new ArrayList<TreeDTO>();
             for (Organization organization : organizationList) {
                 TreeDTO tree = new TreeDTO();
                 tree.setId(organization.getId());
@@ -58,32 +71,39 @@ public class OrganizationController {
                 }
                 treeDTOList.add(tree);
             }
-            ObjectMapper objectMapper = new ObjectMapper();
-            result = objectMapper.writeValueAsString(treeDTOList);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return treeDTOList;
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    /**
+     * 修改organization
+     * @param id
+     * @param name
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     @ResponseBody
-    public String updateOrganization(long id,String name) throws IOException {
-       ResultJson<Organization> result;
+    public ResultJson<Organization> updateOrganization(long id, String name) throws IOException {
+        ResultJson<Organization> result;
         try {
             Organization organization = organizationService.findById(id);
             if (organization != null) {
                 organization.setName(name);
                 organizationService.updateOrganization(organization);
-                result = new ResultJson<Organization>(true,"修改成功!");
+                result = new ResultJson<Organization>(true, Constant.UPDATE_SUCCESS);
             } else {
-                result = new ResultJson<Organization>(false,"不存在该id的数据!");
+                result = new ResultJson<Organization>(false, Constant.DATA_ERROR);
             }
         } catch (Exception e) {
-            result = new ResultJson<Organization>(false,"服务器异常!");
+            logger.error("update organization error", e);
+            result = new ResultJson<Organization>(false, Constant.SYSTEM_ERROR);
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-        return  objectMapper.writeValueAsString(result);
+
+        return result;
 
     }
 }

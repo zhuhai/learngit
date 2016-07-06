@@ -1,17 +1,26 @@
 package com.zhuhai.utils;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.StringUtil;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.util.JSONPObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+
+;
 
 /**
  * Jackson的简单封装.
  */
 public class JsonMapper {
 
+    private static final Logger logger = LoggerFactory.getLogger(JsonMapper.class);
 
     private ObjectMapper mapper;
 
@@ -141,10 +150,10 @@ public class JsonMapper {
      * 支持使用Jaxb的Annotation，使得POJO上的annotation不用与Jackson耦合。
      * 默认会先查找jaxb的annotation，如果找不到再找jackson的。
      */
-    public void enableJaxbAnnotation() {
+   /* public void enableJaxbAnnotation() {
         JaxbAnnotationModule module = new JaxbAnnotationModule();
         mapper.registerModule(module);
-    }
+    }*/
 
     /**
      * 取出Mapper做进一步的设置或使用其他序列化API.

@@ -13,7 +13,6 @@ import com.zhuhai.utils.Constant;
 import com.zhuhai.utils.DateUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -59,11 +58,10 @@ public class UserController {
     @RequiresPermissions("user:view")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public String userList(@RequestParam(value = "sidx",required = false,defaultValue = "create_time") String sidx,
+    public JqGridView<UserDTO> userList(@RequestParam(value = "sidx",required = false,defaultValue = "create_time") String sidx,
                            @RequestParam(value = "sord",required = false,defaultValue = "asc") String sord,
                            @RequestParam(value = "rows",required = false,defaultValue = "10") Integer pageSize,
                            @RequestParam(value = "page",required = false,defaultValue = "1") Integer pageNo)  {
-        String result = null;
         JqGridView<UserDTO> jqGridView = new JqGridView<UserDTO>();
         try {
             PageInfo<User> pageInfo = userService.findAll(sidx,sord,pageNo,pageSize);
@@ -95,13 +93,11 @@ public class UserController {
                 jqGridView.setRows(userDTOList);
             }
 
-            ObjectMapper mapper = new ObjectMapper();
-            result = mapper.writeValueAsString(jqGridView);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return result;
+        return jqGridView;
     }
 
 

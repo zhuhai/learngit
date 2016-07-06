@@ -10,6 +10,12 @@ public class Constant {
 
     public static final String SALT = "xajf@#afs$@2wefsjf#@ljs2#$@34jf**&8$%#2jisjfe";
 
+    public static final String UPDATE_SUCCESS = "修改成功！";
+
+    public static final String SYSTEM_ERROR = "系统异常！";
+
+    public static final String DATA_ERROR = "数据异常！";
+
     public static void main(String[] args) {
         //System.out.println(DigestUtils.sha1Hex(SALT + "7c4a8d09ca3762af61e59520943dc26494f8941b"));
         String str = "1,2,3,4";
