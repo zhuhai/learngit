@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!doctype html>
 <html>
 <head>
@@ -27,8 +28,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-3 col-sm-2">
-                        <button type="button" class="btn btn-sm btn-primary no-border" id="modify">修改</button>
+                    <div class="col-sm-offset-3 col-sm-10">
+                        <shiro:hasPermission name="organization:create">
+                            <button type="button" class="btn btn-sm btn-primary no-border" id="add">添加子节点</button>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="organization:update">
+                            <button type="button" class="btn btn-sm btn-primary no-border" id="modify">修改</button>
+                        </shiro:hasPermission>
+
                     </div>
                 </div>
             </form>
