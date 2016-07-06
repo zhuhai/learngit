@@ -57,7 +57,6 @@
             <div id="login-box" class="login-box visible widget-box no-border" style="background-color: transparent">
               <div class="widget-body">
                 <div class="widget-main">
-                    <div class="red text-center"><b class="message">${message}</b></div>
                   <h4 class="header blue lighter bigger" style="margin-top: 8px">
                     <i class="ace-icon fa fa-coffee green"></i>
                     请输入登录信息
@@ -81,6 +80,10 @@
                         </span>
                       </label>
 
+                      <label class="block clearfix">
+                          <span id="errorMsg" style="color:#A94442">${message}</span>
+                      </label>
+
                       <div class="space"></div>
 
                       <div class="clearfix">
@@ -89,7 +92,7 @@
                             <span class="lbl"> 记住我</span>
                         </label>--%>
 
-                        <button type="button" id="btn" class="btn btn-block btn-primary no-border">
+                        <button type="submit" id="btn" class="btn btn-block btn-primary no-border">
                           <i class="icon-key"></i>
                           登&nbsp;录
                         </button>
@@ -119,7 +122,7 @@
                 </div><!-- /widget-main -->
 
                 <div class="toolbar clearfix">
-                  <div style="height: 30px;"></div>
+                  <div style="height: 40px;"></div>
                 </div>
               </div><!-- /widget-body -->
             </div><!-- /login-box -->
@@ -135,31 +138,49 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/sha1.js"></script>
+<script type="text/javascript" src="/static/js/jquery.validate.min.js"></script>
+
 <script type="text/javascript">
-  $(function(){
-    function login(){
-      $("#pwd").val(CryptoJS.SHA1($("#pwd").val()));
-      $("#fm").submit();
-    }
-    $("#btn").click(function(){
-      var userName = $("#userName").val();
-      var password = $("#pwd").val();
-      if(userName && password) {
-        login();
-      } else{
-        $(".message").text("用户名或密码不能为空")
-      }
+    $(function(){
+        $("#fm").validate({
+            errorElement:'div',
+            errorClass:'help-block',
+            rules:{
+                userName:{
+                  required:true
+                },
+                password:{
+                  required:true,
+                  rangelength:[6,18]
+                }
+            },
+            messages:{
+                userName:{
+                  required:"请输入用户名"
+                },
+                password:{
+                  required:"请输入密码",
+                  rangelength:"密码长度为6~18位"
+                }
+            },
+            highlight:function(e){
+                $(e).closest("label").addClass('has-error');
+            },
+            success:function(e){
+                $(e).closest("label").removeClass('has-error');
+                $(e).remove();
+            },
+            errorPlacement:function(error,element){
+                error.insertAfter(element.parent());
+            },
+            submitHandler:function(form){
+                $("#pwd").val(CryptoJS.SHA1($("#pwd").val()));
+                form.submit();
+            }
+
+        });
 
     });
-
-    $(document).keyup(function(event){
-      if(event.keyCode == 13){
-        login();
-      }
-    });
-
-
-  });
 </script>
 
 </body>
