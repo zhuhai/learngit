@@ -9,71 +9,90 @@
 
 </head>
 <body>
-<div class="search-header">
-    <form id="queryForm">
-        <table class="table-condensed">
+    <div class="search-header">
+        <form id="queryForm">
+            <table class="table-condensed">
 
-        </table>
-    </form>
-</div>
-<div class="row">
-    <div class="col-xs-12">
-        <div class="well well-sm">
-            <shiro:hasPermission name="user:create">
-                <a id="addButton" role="button" class="btn btn-primary btn-sm no-border" data-toggle="modal" data-target="#create-user-modal">添加</a>
-            </shiro:hasPermission>
-            <shiro:hasPermission name="user:update">
-                <a id="editButton" role="button" class="btn btn-purple btn-sm no-border" data-toggle="modal">修改</a>
-            </shiro:hasPermission>
-            <shiro:hasPermission name="user:update">
-                <a id="delButton" role="button" class="btn btn-danger btn-sm no-border">锁定</a>
-            </shiro:hasPermission>
-            <shiro:hasPermission name="user:delete">
-                <a id="delButton" role="button" class="btn btn-danger btn-sm no-border">删除</a>
-            </shiro:hasPermission>
-
-        </div>
-        <table id="grid-table"></table>
-        <div id="grid-pager"></div>
-        <!-- Modal -->
-        <div id="create-user-modal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <form id="editForm">
-                    <input type="hidden" id="edit_id" />
-                    <div class="modal-content">
-                        <div class="modal-header no-padding">
-                            <div class="table-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                    <span class="white">&times;</span>
-                                </button>
-                                <p>添加用户</p>
-                            </div>
-                        </div>
-                        <div class="modal-body" style="max-height: 500px;overflow-y: scroll;">
-
-
-                        </div>
-
-                        <div class="modal-footer no-margin-top">
-                            <div class="text-center">
-
-                                <button id="submitEditButton" type="button" class="btn btn-primary no-border">
-                                    <i class="ace-icon fa fa-floppy-o bigger-125"></i>
-                                    保存
-                                </button>
-
-                            <button class="btn btn-pink no-border" data-dismiss="modal">
-                                <i class="ace-icon fa fa-times bigger-125"></i>
-                                关闭
-                            </button>
-                        </div>
-                    </div>
-            </div><!-- /.modal-content -->
-            </form>
-        </div><!-- /.modal-dialog -->
+            </table>
+        </form>
     </div>
-    </div><!-- /.col -->
-</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="well well-sm">
+                <shiro:hasPermission name="user:create">
+                    <a id="addButton" role="button" class="btn btn-primary btn-sm no-border" data-toggle="modal" data-target="#create-user-modal">添加</a>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="user:update">
+                    <a id="editButton" role="button" class="btn btn-purple btn-sm no-border" data-toggle="modal">修改</a>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="user:update">
+                    <a id="delButton" role="button" class="btn btn-danger btn-sm no-border">锁定</a>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="user:delete">
+                    <a id="delButton" role="button" class="btn btn-danger btn-sm no-border">删除</a>
+                </shiro:hasPermission>
+            </div>
+            <table id="grid-table"></table>
+            <div id="grid-pager"></div>
+            <!-- Modal -->
+            <div id="create-user-modal" class="modal fade" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <form action="/user/create" id="editForm" class="form-horizontal" method="post">
+                        <input type="hidden" id="edit_id" />
+                        <div class="modal-content">
+                            <div class="modal-header no-padding">
+                                <div class="table-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        <span class="white">&times;</span>
+                                    </button>
+                                    <p>添加用户</p>
+                                </div>
+                            </div>
+                            <div class="modal-body" style="max-height: 500px;overflow-y: scroll;">
+                                <div class="form-group">
+                                    <label for="userName" class="col-xs-3 control-label">用户名</label>
+                                    <div class="col-xs-7">
+                                        <input type="text" id="userName" class="form-control" name="userName">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-xs-3 control-label">密码</label>
+                                    <div class="col-xs-7">
+                                        <input type="password" id="password" name="password" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="organization" class="col-xs-3 control-label">部门</label>
+                                    <div class="col-xs-7">
+                                        <select class="form-control" name="organizationId" id="organization">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer no-margin-top">
+                                <div class="text-center">
+                                    <button id="submitEditButton" type="button" class="btn btn-primary no-border">
+                                        <i class="ace-icon fa fa-floppy-o bigger-125"></i>
+                                        保存
+                                    </button>
+                                    <button class="btn btn-pink no-border" data-dismiss="modal">
+                                        <i class="ace-icon fa fa-times bigger-125"></i>
+                                        关闭
+                                    </button>
+                                </div>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </form>
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div><!-- /.col -->
+    </div>
 
     <script type="text/javascript">
         var scripts = [null,'/static/js/common.js',null];
@@ -132,13 +151,13 @@
                                 var screenValue = '';
                                 switch (cellvalue) {
                                     case false:
-                                        screenValue = '未锁定';
+                                        screenValue = '正常';
                                         break;
                                     case true:
                                         screenValue = '<span style="color:red">锁定</span>';
                                         break;
                                     default :
-                                        screenValue = '未锁定';
+                                        screenValue = '正常';
                                 }
                                 return screenValue;
                             }
@@ -179,7 +198,16 @@
                 });
                 //trigger window resize to make the grid get the correct size
                 $(window).triggerHandler('resize.jqGrid');
-                //var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
+
+                $("#editButton").click(function(){
+                    var selr = $(grid_selector).jqGrid('getGridParam','selrow');
+                    var rowData = $(grid_selector).jqGrid('getRowData',selr);
+                    var name = $(grid_selector).jqGrid('getCell',selr,'userName');
+                    console.log(selr);
+                    console.log(rowData);
+                    console.log(name);
+                });
+
             });
 
         });

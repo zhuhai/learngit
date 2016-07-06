@@ -21,7 +21,7 @@
                 <input type="hidden" value="" id="parentIds_input"/>
 
                 <div class="form-group">
-                    <label for="name_input" class="col-sm-3 control-label">名称</label>
+                    <label for="name_input" class="col-sm-3 control-label no-padding-right">名称</label>
 
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="name_input" value=""/>
