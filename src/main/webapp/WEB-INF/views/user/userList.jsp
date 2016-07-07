@@ -38,7 +38,7 @@
             <!-- Modal -->
             <div id="create-user-modal" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
-                    <form  id="createForm" class="form-horizontal">
+                    <form  id="createForm" class="form-horizontal" action="#">
                         <div class="modal-content">
                             <div class="modal-header no-padding">
                                 <div class="table-header">
@@ -97,7 +97,7 @@
 
                             <div class="modal-footer no-margin-top">
                                 <div class="text-center">
-                                    <button id="submitEditButton" type="submit" class="btn btn-primary no-border">
+                                    <button id="submitAddButton" type="button" class="btn btn-primary no-border">
                                         <i class="ace-icon fa fa-floppy-o bigger-125"></i>
                                         保存
                                     </button>
@@ -135,7 +135,7 @@
                         }, 0);
                     }
                 });
-                jQuery(grid_selector).jqGrid({
+                $(grid_selector).jqGrid({
                     url:"/user/list",
                     datatype: "json",
                     mtype:"GET",
@@ -229,7 +229,7 @@
                 });
 
 
-                $('.multiselect').multiselect({
+                $(".multiselect").multiselect({
                     enableFiltering: true,
                     buttonClass: 'btn btn-white btn-primary',
                     buttonWidth:'100%',
@@ -243,7 +243,9 @@
                         liGroup: '<li class="multiselect-item group"><label class="multiselect-group"></label></li>'
                     }
                 });
-
+                $("#submitAddButton").click(function(){
+                    $("#createForm").submit();
+                });
                 $("#createForm").validate({
                     errorElement:'div',
                     errorClass:'help-block',
@@ -286,7 +288,6 @@
                         $(e).remove();
                     },
                     errorPlacement:function(error,element){
-                        console.log(element);
                         if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
                             var controls = element.closest('div[class*="col-"]');
                             if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
@@ -301,18 +302,38 @@
                     },
                     submitHandler:function(form){
                         var userName = $("#userName").val();
-                        var password = CryptoJS.SHA1($("#password").val());
+                        var password = CryptoJS.SHA1($("#password").val())+"";
                         var organizationId = $("#organizationId").val();
-                        var roleIds = $("#roleIds").val();
+                        var roleIds = $("#roleIds").val().toString();
+                        console.log(roleIds);
                         if(!roleIds) {
                             alertErrorNotice("请选择角色！");
                             return ;
                         }
-
+                        $.ajax({
+                            url:'/user/create',
+                            type:'post',
+                            data:{userName:userName,password:password,organizationId:organizationId,roleIds:roleIds},
+                            dataType:'json',
+                            success:function(result) {
+                                if (result && result.success) {
+                                    $("#create-user-modal").modal('hide');
+                                    $(grid_selector).jqGrid().trigger("reloadGrid");
+                                } else {
+                                    alertErrorNotice(result.msg)
+                                }
+                            },
+                            error:function() {
+                                alertErrorNotice("系统异常，添加失败！");
+                            }
+                        });
                     }
 
+                });
 
-
+                //模态框关闭，清空表单内容
+                $("#create-user-modal").on('hidden.bs.modal',function(){
+                    $("#createForm")[0].reset();
                 });
 
             });

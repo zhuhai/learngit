@@ -2,6 +2,7 @@ package com.zhuhai.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.zhuhai.dto.JqGridView;
+import com.zhuhai.dto.ResultJson;
 import com.zhuhai.dto.UserDTO;
 import com.zhuhai.entity.Organization;
 import com.zhuhai.entity.Role;
@@ -114,13 +115,18 @@ public class UserController {
 
     @RequiresPermissions("user:create")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createUser(User user, RedirectAttributes redirectAttributes) {
-        user.setPassword(DigestUtils.sha1Hex(Constant.SALT + user.getPassword()));
-        user.setLocked(false);
-        System.out.println(user.getRoleIds());
-        //userService.saveUser(user);
-        redirectAttributes.addFlashAttribute("message", "添加成功");
-        return "redirect:/user";
+    @ResponseBody
+    public ResultJson<User> createUser(User user) {
+        try {
+            user.setPassword(DigestUtils.sha1Hex(Constant.SALT + user.getPassword()));
+            user.setLocked(false);
+            System.out.println(user.getRoleIds());
+            //userService.saveUser(user);
+            return new ResultJson<User>(true,Constant.ADD_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultJson<User>(false,Constant.SYSTEM_ERROR);
+        }
     }
 
     @RequiresPermissions("user:update")

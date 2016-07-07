@@ -16,6 +16,8 @@ public class Constant {
 
     public static final String DATA_ERROR = "数据异常！";
 
+    public static final String ADD_SUCCESS = "添加成功！";
+
     public static void main(String[] args) {
         //System.out.println(DigestUtils.sha1Hex(SALT + "7c4a8d09ca3762af61e59520943dc26494f8941b"));
         String str = "1,2,3,4";
