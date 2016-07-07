@@ -291,7 +291,7 @@
     <script src="/static/js/ace/ace.min.js"></script>
     <script src="/static/js/jqGrid/jquery.jqGrid.min.js"></script>
     <script src="/static/js/jqGrid/grid.locale-cn.js"></script>
-
+    <script src="/static/js/jquery.validate.min.js"></script>
     <script type="text/javascript">
         //Load content via ajax
         $(function(){

@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageInfo<User> findAll(String sidx, String sord, Integer pageNo, Integer pageSize) {
+    public PageInfo<User> findAllByPage(String sidx, String sord, Integer pageNo, Integer pageSize) {
         PageHelper.startPage(pageNo, pageSize);
         PageHelper.orderBy(sidx + " " + sord);
         List<User> userList = userMapper.findAll();

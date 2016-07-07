@@ -44,7 +44,7 @@
 
 </div>
 <script type="text/javascript">
-    var scripts = [null, "/static/js/jquery.ztree.all.min.js", null];
+    var scripts = [null,"/static/js/common.js", "/static/js/jquery.ztree.all.min.js",null];
     ace.load_ajax_scripts(scripts, function () {
         $(function () {
             var zNodes;
@@ -119,21 +119,7 @@
 
             });
 
-            function alertErrorNotice(msg) {
-                $.gritter.add({
-                    title: "系统提示",
-                    text: msg,
-                    class_name: "gritter-error gritter-center"
-                });
-            }
 
-            function alertSuccessNotice(msg) {
-                $.gritter.add({
-                    title: "系统提示",
-                    text: msg,
-                    class_name: "gritter-info gritter-center"
-                });
-            }
 
 
 

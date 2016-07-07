@@ -50,8 +50,11 @@ public class UserController {
 
     @RequiresPermissions("user:view")
     @RequestMapping(method = RequestMethod.GET)
-    public String getUserList() {
-
+    public String getUserList(Model model) {
+        List<Organization> organizationList = organizationService.findAll();
+        List<Role> roleList = roleService.findAll();
+        model.addAttribute("organizationList", organizationList);
+        model.addAttribute("roleList",roleList);
         return "user/userList";
     }
 
@@ -64,7 +67,7 @@ public class UserController {
                            @RequestParam(value = "page",required = false,defaultValue = "1") Integer pageNo)  {
         JqGridView<UserDTO> jqGridView = new JqGridView<UserDTO>();
         try {
-            PageInfo<User> pageInfo = userService.findAll(sidx,sord,pageNo,pageSize);
+            PageInfo<User> pageInfo = userService.findAllByPage(sidx, sord, pageNo, pageSize);
             List<UserDTO> userDTOList = new ArrayList<UserDTO>();
             for (User user : pageInfo.getList()) {
                 UserDTO userDTO = new UserDTO();
@@ -114,8 +117,8 @@ public class UserController {
     public String createUser(User user, RedirectAttributes redirectAttributes) {
         user.setPassword(DigestUtils.sha1Hex(Constant.SALT + user.getPassword()));
         user.setLocked(false);
-        user.setRoleIds("2");
-        userService.saveUser(user);
+        System.out.println(user.getRoleIds());
+        //userService.saveUser(user);
         redirectAttributes.addFlashAttribute("message", "添加成功");
         return "redirect:/user";
     }

@@ -1,5 +1,4 @@
 function styleCheckbox(table) {
-
     $(table).find('input:checkbox').addClass('ace')
         .after('<span class="lbl align-top" />');
 
@@ -9,6 +8,7 @@ function styleCheckbox(table) {
         .wrap('<label />').after('<span class="lbl align-top" />');
 
 }
+
 
 
 //unlike navButtons icons, action icons in rows seem to be hard-coded
@@ -51,3 +51,20 @@ function enableTooltips(table) {
     $('.navtable .ui-pg-button').tooltip({container:'body'});
     $(table).find('.ui-pg-div').tooltip({container:'body'});
 }
+
+function alertErrorNotice(msg) {
+    $.gritter.add({
+        title: "系统提示",
+        text: msg,
+        class_name: "gritter-error gritter-center"
+    });
+}
+
+function alertSuccessNotice(msg) {
+    $.gritter.add({
+        title: "系统提示",
+        text: msg,
+        class_name: "gritter-info gritter-center"
+    });
+}
+

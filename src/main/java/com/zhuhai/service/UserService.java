@@ -17,7 +17,7 @@ public interface UserService {
     public void updateUser(User user);
     public void deleteUser(Long userId);
     public User findUserById(Long userId);
-    public PageInfo<User> findAll(String sidx, String sord, Integer pageNo, Integer pageSize);
+    public PageInfo<User> findAllByPage(String sidx, String sord, Integer pageNo, Integer pageSize);
     public User findUserByUserName(String userName);
     public Set<String> findRolesByUserName(String userName);
     public Set<String> findPermissionsByUserName(String userName);
