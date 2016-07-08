@@ -105,12 +105,22 @@ public class UserController {
     }
 
 
-    @RequiresPermissions("user:create")
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public String createUserForm(Model model) {
-        List<Organization> organizationList = organizationService.findAll();
-        model.addAttribute("organizationList", organizationList);
-        return "user/userAdd";
+    @RequiresPermissions("user:view")
+    @RequestMapping(value = "/findByName", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultJson<User> findByName(String userName) {
+        try {
+            User user = userService.findUserByUserName(userName);
+            if (user == null) {
+               return new ResultJson<User>(true,"用户名不存在");
+            }else {
+                return new ResultJson<User>(false,"用户名已存在");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultJson<User>(false,Constant.SYSTEM_ERROR);
+        }
+
     }
 
     @RequiresPermissions("user:create")
@@ -118,11 +128,16 @@ public class UserController {
     @ResponseBody
     public ResultJson<User> createUser(User user) {
         try {
-            user.setPassword(DigestUtils.sha1Hex(Constant.SALT + user.getPassword()));
-            user.setLocked(false);
-            System.out.println(user.getRoleIds());
-            //userService.saveUser(user);
-            return new ResultJson<User>(true,Constant.ADD_SUCCESS);
+            User checkUser = userService.findUserByUserName(user.getUserName());
+            if (checkUser == null) {
+                user.setPassword(DigestUtils.sha1Hex(Constant.SALT + user.getPassword()));
+                user.setLocked(false);
+                userService.saveUser(user);
+                return new ResultJson<User>(true,Constant.ADD_SUCCESS);
+            }else {
+                return new ResultJson<User>(false,Constant.ERROR_USERNAME_EXISTS);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultJson<User>(false,Constant.SYSTEM_ERROR);

@@ -1,5 +1,7 @@
 package com.zhuhai.utils;
 
+import java.math.BigDecimal;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zhuhai
@@ -18,18 +20,12 @@ public class Constant {
 
     public static final String ADD_SUCCESS = "添加成功！";
 
-    public static void main(String[] args) {
-        //System.out.println(DigestUtils.sha1Hex(SALT + "7c4a8d09ca3762af61e59520943dc26494f8941b"));
-        String str = "1,2,3,4";
-        String[] ids = str.split(",");
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < ids.length; i++) {
-            sb.append(ids[i]);
-            if (i<ids.length-1){
-                sb.append(",");
-            }
-        }
+    public static final String ERROR_USERNAME_EXISTS = "用户名已存在！";
 
-        System.out.println(sb.toString());
+    public static void main(String[] args) {
+        BigDecimal b1 = new BigDecimal(0);
+        BigDecimal b2 = new BigDecimal(1.0);
+        System.out.println(b1.compareTo(b2));
     }
+
 }

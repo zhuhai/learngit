@@ -139,7 +139,7 @@
                     url:"/user/list",
                     datatype: "json",
                     mtype:"GET",
-                    //height: 250,
+                    height: '300',
                     colNames:['编号','用户名','部门','角色','是否锁定','创建时间'],
                     colModel:[
                         {
@@ -220,12 +220,14 @@
                 $(window).triggerHandler('resize.jqGrid');
 
                 $("#editButton").click(function(){
-                    var selr = $(grid_selector).jqGrid('getGridParam','selrow');
-                    var rowData = $(grid_selector).jqGrid('getRowData',selr);
-                    var name = $(grid_selector).jqGrid('getCell',selr,'userName');
-                    console.log(selr);
-                    console.log(rowData);
-                    console.log(name);
+                    //var id = $(grid_selector).jqGrid('getGridParam','selrow');
+                    var userIds = $(grid_selector).jqGrid('getGridParam','selarrrow');
+                    if(userIds.length != 1){
+                        alertErrorNotice("请选择需要修改的一条数据！");
+                    }
+                    //var rowData = $(grid_selector).jqGrid('getRowData',id);
+                    //var name = $(grid_selector).jqGrid('getCell',id,'userName');
+
                 });
 
 
@@ -304,16 +306,15 @@
                         var userName = $("#userName").val();
                         var password = CryptoJS.SHA1($("#password").val())+"";
                         var organizationId = $("#organizationId").val();
-                        var roleIds = $("#roleIds").val().toString();
-                        console.log(roleIds);
+                        var roleIds = $("#roleIds").val();
                         if(!roleIds) {
                             alertErrorNotice("请选择角色！");
-                            return ;
+                            return;
                         }
                         $.ajax({
                             url:'/user/create',
                             type:'post',
-                            data:{userName:userName,password:password,organizationId:organizationId,roleIds:roleIds},
+                            data:{userName:userName,password:password,organizationId:organizationId,roleIds:roleIds.toString()},
                             dataType:'json',
                             success:function(result) {
                                 if (result && result.success) {
@@ -334,7 +335,9 @@
                 //模态框关闭，清空表单内容
                 $("#create-user-modal").on('hidden.bs.modal',function(){
                     $("#createForm")[0].reset();
+                    $("#roleIds").multiselect('refresh');
                 });
+
 
             });
 
