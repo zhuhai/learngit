@@ -1,6 +1,7 @@
 package com.zhuhai.mapper;
 
 import com.zhuhai.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface UserMapper {
     public List<User> findAll();
 
     public User findByUserName(String userName);
+
+    public void lockOrUnLockUser(@Param("ids") Long[] ids,@Param("lock") boolean lock);
 }

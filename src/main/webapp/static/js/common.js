@@ -52,19 +52,21 @@ function enableTooltips(table) {
     $(table).find('.ui-pg-div').tooltip({container:'body'});
 }
 
-function alertErrorNotice(msg) {
+function alertErrorNotice(msg,time) {
     $.gritter.add({
         title: "系统提示",
         text: msg,
-        class_name: "gritter-error gritter-center"
+        class_name: "gritter-error gritter-center",
+        time:time
     });
 }
 
-function alertSuccessNotice(msg) {
+function alertSuccessNotice(msg,time) {
     $.gritter.add({
         title: "系统提示",
         text: msg,
-        class_name: "gritter-info gritter-center"
+        class_name: "gritter-info gritter-center",
+        time:time
     });
 }
 

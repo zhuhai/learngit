@@ -5,7 +5,7 @@
         
 <mapper namespace="com.zhuhai.mapper.RoleMapper">
 
-    <cache/>
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
     <sql id="roleColumns">id,role,description,resource_ids,avaliable,update_time,create_time</sql>
 

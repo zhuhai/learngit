@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -145,22 +144,50 @@ public class UserController {
     }
 
     @RequiresPermissions("user:update")
-    @RequestMapping(value = "/{id:\\d+}/update", method = RequestMethod.GET)
-    public String updateUserForm(@PathVariable long id, Model model) {
-        User user = userService.findUserById(id);
-        List<Organization> organizationList = organizationService.findAll();
-        model.addAttribute("organizationList", organizationList);
-        model.addAttribute("user", user);
-        return "/user/userEdit";
+    @RequestMapping(value = "/{id:\\d+}/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultJson<User> updateUserForm(@PathVariable long id, String userName,Long organizationId,String roleIds) {
+        try {
+            User user = userService.findUserById(id);
+            User checkUser = userService.findUserByUserName(userName);
+            if(checkUser !=null && !checkUser.getId().equals(user.getId())) {
+                return new ResultJson<User>(false,Constant.ERROR_USERNAME_EXISTS);
+            }
+            user.setUserName(userName);
+            user.setOrganizationId(organizationId);
+            user.setRoleIds(roleIds);
+            userService.updateUser(user);
+            return new ResultJson<User>(true,Constant.UPDATE_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultJson<User>(false,Constant.SYSTEM_ERROR);
+        }
+
     }
 
+    /**
+     * 锁定或解锁用户
+     * @param ids
+     * @param lock
+     * @return
+     */
     @RequiresPermissions("user:update")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String updateUser(User user, RedirectAttributes redirectAttributes) {
-        user.setPassword(DigestUtils.sha1Hex(Constant.SALT + user.getPassword()));
-        user.setLocked(false);
-        userService.updateUser(user);
-        redirectAttributes.addFlashAttribute("message", "修改成功");
-        return "redirect:/user";
+    @RequestMapping(value = "/lock",method = RequestMethod.POST)
+    @ResponseBody
+    public ResultJson<User> lockOrUnLockUser(@RequestParam("ids[]") Long[] ids,@RequestParam("lock") Boolean lock) {
+        try {
+            userService.lockOrUnLockUser(ids, lock);
+            if (lock) {
+                return new ResultJson<User>(true,Constant.LOCK_SUCCESS);
+            }else {
+                return new ResultJson<User>(true,Constant.UNLOCK_SUCCESS);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultJson<User>(false,Constant.SYSTEM_ERROR);
+        }
     }
+
+
 }

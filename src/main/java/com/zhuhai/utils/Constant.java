@@ -22,6 +22,10 @@ public class Constant {
 
     public static final String ERROR_USERNAME_EXISTS = "用户名已存在！";
 
+    public static final String LOCK_SUCCESS = "用户锁定成功！";
+
+    public static final String UNLOCK_SUCCESS = "用户解锁成功!";
+
     public static void main(String[] args) {
         BigDecimal b1 = new BigDecimal(0);
         BigDecimal b2 = new BigDecimal(1.0);

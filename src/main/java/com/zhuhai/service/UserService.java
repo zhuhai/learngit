@@ -21,4 +21,6 @@ public interface UserService {
     public User findUserByUserName(String userName);
     public Set<String> findRolesByUserName(String userName);
     public Set<String> findPermissionsByUserName(String userName);
+    public void lockOrUnLockUser(Long[] ids,boolean lock);
+
 }

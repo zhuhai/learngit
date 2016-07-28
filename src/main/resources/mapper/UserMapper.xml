@@ -5,7 +5,7 @@
 
 <mapper namespace="com.zhuhai.mapper.UserMapper">
 
-    <cache/>
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
     <sql id="userColumns">id,username,password,organization_id,role_ids,locked,update_time,create_time</sql>
 
@@ -32,6 +32,13 @@
     <select id="findByUserName" parameterType="string" resultType="User">
         SELECT <include refid="userColumns"/> FROM sys_user WHERE username = #{userName}
     </select>
+
+    <update id="lockOrUnLockUser">
+        UPDATE sys_user SET locked = #{lock} WHERE id IN
+        <foreach collection="ids" item="ids" index="index" open="(" separator="," close=")">
+            #{ids}
+        </foreach>
+    </update>
 
 </mapper>
 

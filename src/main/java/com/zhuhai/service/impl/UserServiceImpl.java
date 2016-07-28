@@ -105,4 +105,9 @@ public class UserServiceImpl implements UserService {
         return resourcesMapper.findPermissionsByIds(resourceIdSet.toArray(new Long[resourceIdSet.size()]));
     }
 
+    @Override
+    public void lockOrUnLockUser(Long[] ids, boolean lock) {
+        userMapper.lockOrUnLockUser(ids,lock);
+    }
+
 }
